@@ -16,16 +16,16 @@
   - 이민하: 백엔드 개발 (Node.js, Flask)
   - 김시연: 데이터베이스 설계 및 구축 (MySQL)
 
-## 🛠 기술 스택
-- **Frontend**: React, HTML/CSS, JavaScript  
-- **Backend**: Node.js, Flask (Python)  
-- **Database**: MySQL  
-- **AI/ML**: OpenAI, Google Gemini API  
-- **Infra/Tool**: GitHub, Docker, Figma, Notion  
-
 ## ✨ 주요 기능
 - 회원가입 및 로그인
 - 전세 계약서 업로드 및 위험도 분석
 - 위험 지역 지도 시각화
 - 전세 사기 예방 법률 상담 챗봇
 - 사용자 맞춤형 알림 서비스
+
+## 🛠 기술 스택
+- **Frontend**: React, HTML/CSS, JavaScript  
+- **Backend**: Node.js, Flask (Python)  
+- **Database**: MySQL  
+- **AI/ML**: OpenAI, Google Gemini API  
+- **Infra/Tool**: GitHub 
