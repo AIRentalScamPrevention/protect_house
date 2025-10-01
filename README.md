@@ -24,7 +24,6 @@
 - 사용자 맞춤형 알림 서비스
 
 ## 🛠 기술 스택
-## 🛠 기술 스택
 
 - **Frontend**  
   ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
