@@ -1,0 +1,363 @@
+.mp-layout {
+    /* 컬럼 폭 변수 */
+    --sidebar-w: 240px;
+    --profile-w: 320px;
+
+    /* 화면 전체를 사용 */
+    width: 100vw;
+    max-width: none;
+    margin: 0;
+    padding: 0 16px;         /* 좌우 살짝 여백 */
+    box-sizing: border-box;
+
+    /* 부모의 중앙정렬 영향을 무력화(방어적 리셋) */
+    justify-self: stretch;
+    align-self: start;
+    place-items: initial;
+    justify-items: stretch;
+
+    /* 3열 그리드 */
+    display: grid;
+    grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--profile-w);
+    grid-template-areas: "sidebar content profile";
+    gap: 24px;
+
+    align-items: start;
+    min-height: 100vh;
+    background: #f6f7f9;
+}
+
+/* ▶ 우측 컬럼 제거용 2열 레이아웃 모드 */
+.mp-layout.no-right {
+    grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+    grid-template-areas: "sidebar content";
+}
+.mp-layout.no-right .mp-profile { display: none; }
+
+/* ===== 좌측 사이드바 ===== */
+.mp-sidebar {
+    grid-area: sidebar;
+    background: #7ea3a9;     /* 스크린샷 느낌의 청록 */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 14px;
+}
+
+.mp-logo {
+    font-weight: 800;
+    letter-spacing: .5px;
+    font-size: 22px;
+    margin: 6px 8px 16px;
+    /* 로고를 버튼으로 사용할 때 기본 버튼 스타일 제거 */
+    background: transparent;
+    border: none;
+    color: #fff;
+    text-align: left;
+    padding: 0;
+    cursor: pointer;
+}
+
+.mp-nav { display: grid; gap: 6px; }
+
+.mp-nav-item {
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    color: #f7fbfc;
+    cursor: pointer;
+}
+.mp-nav-item:hover  { background: rgba(255,255,255,.12); }
+.mp-nav-item.active { background: rgba(255,255,255,.22); font-weight: 600; }
+
+.mp-sidebar-bottom { margin-top: auto; }
+
+.mp-logout {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.35);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ===== 가운데 콘텐츠 ===== */
+.mp-content {
+    grid-area: content;
+    padding: 28px 0;
+}
+
+.mp-section-title {
+    margin: 0 0 12px 0;
+    padding: 0 8px;
+    font-size: 18px;
+    color: #30343b;
+}
+
+/* 상단 우측 액션 (내 정보 관리 / 로그아웃) */
+.mp-content-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.mp-actions-right { display:flex; gap:8px; align-items:center; }
+
+/* 상단 우측에 배치되는 로그아웃 버튼 오버라이드 */
+.mp-actions-right .mp-logout {
+    width: auto;
+    padding: 8px 12px;
+    border: 1px solid #cfd8e3;
+    border-radius: 10px;
+    background: #fff;
+    color: #334155;
+}
+
+.mp-filters {
+    display: flex;
+    gap: 8px;
+    padding: 0 8px 12px 8px;
+}
+
+.mp-input, .mp-select {
+    border: 1px solid #d9dee5;
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #fff;
+}
+
+/* 상담 카드 리스트 */
+.mp-card-list {
+    list-style: none;
+    padding: 0 8px 28px 8px;
+    margin: 0;
+    display: grid;
+    gap: 14px;
+}
+
+.mp-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(16,24,40,.06);
+    padding: 14px 16px;
+    border: 1px solid #eef1f5;
+}
+
+.mp-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* ← space-between 에서 변경 */
+    margin-bottom: 6px;
+}
+
+.mp-card-meta { display: flex; gap: 10px; align-items: center; }
+.mp-date { font-size: 12px; color: #7a828e; }
+
+.mp-risk {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #eef6ff;
+    color: #1e4db7;
+    border: 1px solid #d7e7ff;
+}
+.mp-risk-high   { background:#ffe9e9; color:#c13232; border-color:#ffd1d1; }
+.mp-risk-medium { background:#fff7e6; color:#9b6b00; border-color:#ffe9bf; }
+.mp-risk-warn   { background:#f1f5ff; color:#4356b5; border-color:#e1e8ff; }
+.mp-risk-low    { background:#e8faf0; color:#1f7a46; border-color:#c7f0d7; }
+
+.mp-card-title {
+    margin: 6px 0 2px 0;
+    font-size: 16px;
+    color: #23262b;
+}
+.mp-card-sub { font-size: 13px; color: #7a828e; }
+
+.mp-tags { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+.mp-tag {
+    font-size: 12px;
+    padding: 4px 8px;
+    background: #f3f5f8;
+    color: #516070;
+    border: 1px solid #e6ebf2;
+    border-radius: 999px;
+}
+
+.mp-card-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+/* ===== 우측 프로필 ===== */
+.mp-profile {
+    grid-area: profile;
+    padding: 28px 14px 28px 0;
+}
+
+.mp-profile-card {
+    position: sticky;
+    top: 20px;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #eef1f5;
+    box-shadow: 0 4px 16px rgba(16,24,40,.06);
+    padding: 16px;
+}
+
+.mp-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(145deg, #e7eef3, #f4f7fb);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 12px;
+}
+
+.mp-user-name { font-weight: 700; color: #1f2937; }
+.mp-user-sub  { font-size: 12px; color: #6b7280; }
+
+.mp-quick {
+    list-style: none;
+    padding: 10px 0 0 0;
+    margin: 0;
+    display: grid;
+    gap: 6px;
+}
+
+.link {
+    background: transparent; border: none; color: #3563e9; cursor: pointer; padding: 0;
+}
+.link-ghost {
+    background: transparent; border: none; color: #1f7a46; cursor: pointer; font-size: 13px;
+}
+
+/* ===== 버튼 공통 ===== */
+.btn-primary {
+    border: none;
+    background: #2f81f7;
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.btn-outline {
+    border: 1px solid #cfd8e3;
+    background: #fff;
+    color: #334155;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btn-ghost {
+    border: none;
+    background: transparent;
+    color: #3563e9;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* 모달 최소 스타일 */
+.mp-modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,.35); display:flex; align-items:center; justify-content:center; z-index:50; }
+.mp-modal { width:min(760px, 92vw); background:#fff; border-radius:12px; padding:16px 18px; box-shadow:0 10px 30px rgba(0,0,0,.18); }
+.mp-modal-head { display:flex; align-items:center; justify-content:space-between; }
+.mp-modal-close { border:none; background:none; font-size:22px; line-height:1; cursor:pointer; }
+.mp-modal-form { display:flex; flex-direction:column; gap:14px; }
+.mp-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.mp-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.mp-divider { border:none; border-top:1px solid #eee; margin:6px 0; }
+.mp-subtitle { margin:0; font-size:14px; color:#333; }
+.mp-modal-actions { display:flex; gap:8px; justify-content:flex-end; }
+
+.hint { font-size:12px; color:#666; margin-top:4px; }
+.error { font-size:12px; color:#d32f2f; margin-top:4px; }
+
+/* =========================
+   Modal form polish
+   ========================= */
+.mp-modal-head h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #111827;
+}
+.mp-modal-close { color:#6b7280; }
+.mp-modal-close:hover { color:#111827; }
+
+/* 라벨/필드 공통 */
+.mp-modal .field { display:flex; flex-direction:column; gap:6px; }
+.mp-modal .field label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* 인풋 기본 스타일 */
+.mp-modal .field input {
+    height: 40px;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #111827;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    box-sizing: border-box;
+}
+.mp-modal .field input::placeholder { color:#9ca3af; }
+
+/* 포커스 상태 */
+.mp-modal .field input:focus {
+    outline: 0;
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(147,197,253,.35);
+    background: #fff;
+}
+
+/* 읽기전용(아이디) */
+.mp-modal .field input[readonly] {
+    background: #f3f4f6;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+/* 도움말/에러 */
+.mp-modal .hint  { margin-top: 6px; font-size: 12px; color: #6b7280; }
+.mp-modal .error { margin-top: 6px; font-size: 12px; color: #dc2626; }
+
+/* 구분선/액션 영역 */
+.mp-modal .mp-divider { margin: 12px 0; border-top-color:#eef2f7; }
+.mp-modal-actions { padding-top: 8px; }
+
+/* 버튼(모달 안) 톤 맞춤 */
+.mp-modal .btn-primary { background:#22c55e; border:1px solid #22c55e; }
+.mp-modal .btn-primary:hover { filter: brightness(.96); }
+.mp-modal .btn-ghost { color:#374151; }
+
+/* 필수표시 색상(이미 html에 <span class="req">*</span> 있음) */
+.req { color:#ef4444; }
+
+/* 작은 화면: 1열 스택 */
+@media (max-width: 640px) {
+    .mp-modal .mp-grid-2,
+    .mp-modal .mp-grid-3 { grid-template-columns: 1fr; }
+}
+
+/* =========================
+   반응형
+   ========================= */
+@media (max-width: 900px) {
+    .mp-layout {
+        grid-template-columns: 200px 1fr;
+        grid-template-areas: "sidebar content";
+    }
+    .mp-profile { display: none; }
+}
+
+@media (max-width: 720px) {
+    .mp-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas: "content";  /* 사이드바도 숨기고 한 컬럼로 */
+        padding: 0 12px;
+    }
+    .mp-sidebar { display: none; }
+}
