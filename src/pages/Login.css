@@ -1,9 +1,9 @@
 :root {
     /* 팔레트 매핑 */
-    --card: #FFFFFF;     /* ⬜️ 화이트(카드/팝업 배경) */
-    --line: #e5e7eb;     /* 라인(경계) */
-    --text: #212529;     /* ⚫️ 텍스트 블랙 */
-    --primary: #00AEEF;  /* 💧 선명한 파랑 (기본 버튼/링크) */
+    --card: #FFFFFF;
+    --line: #e5e7eb;
+    --text: #212529;
+    --primary: #00AEEF;
 
     /* 헤더/푸터 */
     --header-h: 56px;     /* 헤더 높이 */
@@ -11,7 +11,7 @@
     --header-bg: #1A2E4D; /* 상단바 배경(딥 네이비) */
 
     /* 로고 크기 (필요시 숫자만 조정: 28~40px 권장) */
-    --logo-h: 32px;
+    --logo-h: 85px;
 }
 
 /* 카드 박스가 확실히 보이도록 강제 */
@@ -24,6 +24,14 @@
     max-width: 380px !important;
     width: 100% !important;
     margin: 0 auto !important;
+}
+
+.login-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text, #212529);
+    margin-bottom: 16px;
 }
 
 /* 폼을 세로 그리드로 강제 (한 줄로 붙는 현상 방지) */
@@ -47,23 +55,23 @@
     padding: 12px 14px !important;
     border-radius: 10px !important;
     border: 1px solid var(--line, #e5e7eb) !important;
-    background: #FFFFFF !important;                 /* ⬜️ */
-    color: var(--text, #212529) !important;         /* ⚫️ */
+    background: #FFFFFF !important;
+    color: var(--text, #212529) !important;
     outline: none !important;
 }
 
 /* 버튼 외형 복구 */
 .login-btn {
     display: block !important;
+    align-items: center !important;
+    justify-content: center !important;
     padding: 12px 14px !important;
     border-radius: 10px !important;
     border: 1px solid var(--primary, #00AEEF) !important;
-    background: var(--primary, #00AEEF) !important; /* 💧 */
+    background: var(--primary, #00AEEF) !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
 }
-
-/* ===== 헤더: 전체폭 고정 + 우측 메뉴 정렬 + 레이어 우선순위 ===== */
 
 /* 상단 헤더를 뷰포트 가로 전체로 고정 */
 .login-header{
@@ -165,6 +173,11 @@
     outline: 2px solid rgba(10, 35, 66, 0.8);  /* 딥네이비 포커스 링 */
     outline-offset: 2px;
     border-radius: 4px;
+}
+
+.login-footer .signup-link:hover {
+    color: var(--primary, #0d4f75);
+    text-decoration: underline;
 }
 
 /* 페이지 본문이 헤더 아래에서 시작하도록 상단/하단 패딩(고정 바 대비) */

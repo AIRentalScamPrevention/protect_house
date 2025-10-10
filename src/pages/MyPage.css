@@ -41,7 +41,7 @@
     color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    padding: 18px 14px;
+    padding: 0 14px 10px 14px;
     height: 100vh;
 }
 
@@ -49,7 +49,7 @@
     font-weight: 800;
     letter-spacing: .5px;
     font-size: 22px;
-    margin: 6px 8px 16px;
+    margin: 6px 8px 0;
     background: transparent;
     border: none;
     color: #FFFFFF;
@@ -59,7 +59,7 @@
 }
 
 .mp-logo img {
-    height: 70px; /* ← 크기 줄이기 (필요 시 28px 정도도 깔끔) */
+    height: 150px; /* ← 크기 줄이기 (필요 시 28px 정도도 깔끔) */
     width: auto;
     display: block;
 }
@@ -391,4 +391,12 @@
         padding: 0 12px;
     }
     .mp-sidebar { display: none; }
+}
+
+@media (min-width: 1024px) {
+    .mp-logo img { height: 120px; } /* 큰 화면일 때 */
+}
+
+@media (max-width: 600px) {
+    .mp-logo img { height: 80px; } /* 모바일일 때 */
 }
