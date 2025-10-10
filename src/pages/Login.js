@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // ← Link 추가
 import { useAuth } from "../auth/AuthContext";
 import SignupModal from "../auth/SignupModal";
 import "./Login.css";
+import BrandLogo from "../image/logo.png";
 
 export default function Login() {
-    const { login } = useAuth();
+    const { login, user } = useAuth(); // user 가져와서 링크 노출 제어에 사용 가능
     const nav = useNavigate();
 
     const [form, setForm] = useState({ username: "", password: "" });
@@ -27,17 +28,22 @@ export default function Login() {
 
     return (
         <div className="page">
-            {/* 상단 네비게이션 (요청 명칭 반영) */}
+            {/* 상단 네비게이션 */}
             <header className="login-header">
-                <h1 className="site-title">전세사기 상담 챗봇 서비스</h1>
+                <Link to="/login" className="brand-link" aria-label="홈">
+                    <img src={BrandLogo} alt="" className="site-logo" />
+                </Link>
+
+                {/* ↓↓↓ 여는 <nav>가 필요합니다 */}
                 <nav className="nav-menu">
-                    <a href="/chat" className="nav-link">챗봇 상담</a>
-                    <a href="/community" className="nav-link">커뮤니티</a>
-                    <a href="/mypage" className="nav-link">마이페이지</a>
+                    {/* 챗봇 라우트는 나중에 추가 예정이면 임시로 비활성/숨김 처리해도 됨 */}
+                    {/* <Link to="/chatbot" className="nav-link">챗봇 상담</Link> */}
+                    {user && <Link to="/mypage" className="nav-link">마이페이지</Link>}
+                    <Link to="/login" className="nav-link">로그인</Link>
                 </nav>
             </header>
 
-            {/* 로그인 팝업: 화면 중앙 정렬 */}
+            {/* 로그인 카드 */}
             <div className="login-wrap">
                 <div className="login-card" role="dialog" aria-labelledby="login-title">
                     <h2 id="login-title" className="login-title">로그인</h2>
@@ -68,21 +74,20 @@ export default function Login() {
                         </button>
                     </form>
 
-
                     <div className="login-footer">
                         <button
                             onClick={() => setOpenSignup(true)}
                             className="signup-link"
                             type="button"
                         >
-                            아직 계정이 없나요? 회원가입
+                            처음이라면 회원가입
                         </button>
                     </div>
                 </div>
             </div>
 
             {/* 회원가입 모달 */}
-            {openSignup && <SignupModal onClose={() => setOpenSignup(false)}/>}
+            {openSignup && <SignupModal onClose={() => setOpenSignup(false)} />}
 
             <footer className="login-footbar">
                 <span>© 2025 전세사기 방지 프로젝트</span>

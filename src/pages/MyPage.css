@@ -7,7 +7,7 @@
     width: 100vw;
     max-width: none;
     margin: 0;
-    padding: 0 16px;         /* 좌우 살짝 여백 */
+    padding: 0;         /* 좌우 살짝 여백 */
     box-sizing: border-box;
 
     /* 부모의 중앙정렬 영향을 무력화(방어적 리셋) */
@@ -24,7 +24,7 @@
 
     align-items: start;
     min-height: 100vh;
-    background: #f6f7f9;
+    background: #F8F9FA; /* 배경 그레이 */
 }
 
 /* ▶ 우측 컬럼 제거용 2열 레이아웃 모드 */
@@ -37,11 +37,12 @@
 /* ===== 좌측 사이드바 ===== */
 .mp-sidebar {
     grid-area: sidebar;
-    background: #7ea3a9;     /* 스크린샷 느낌의 청록 */
-    color: #fff;
+    background: #1A2E4D;   /* 딥 네이비 */
+    color: #FFFFFF;
     display: flex;
     flex-direction: column;
     padding: 18px 14px;
+    height: 100vh;
 }
 
 .mp-logo {
@@ -49,13 +50,18 @@
     letter-spacing: .5px;
     font-size: 22px;
     margin: 6px 8px 16px;
-    /* 로고를 버튼으로 사용할 때 기본 버튼 스타일 제거 */
     background: transparent;
     border: none;
-    color: #fff;
+    color: #FFFFFF;
     text-align: left;
     padding: 0;
     cursor: pointer;
+}
+
+.mp-logo img {
+    height: 70px; /* ← 크기 줄이기 (필요 시 28px 정도도 깔끔) */
+    width: auto;
+    display: block;
 }
 
 .mp-nav { display: grid; gap: 6px; }
@@ -66,7 +72,7 @@
     border-radius: 10px;
     border: none;
     background: transparent;
-    color: #f7fbfc;
+    color: #FFFFFF;
     cursor: pointer;
 }
 .mp-nav-item:hover  { background: rgba(255,255,255,.12); }
@@ -80,7 +86,7 @@
     border-radius: 10px;
     border: 1px solid rgba(255,255,255,.35);
     background: transparent;
-    color: #fff;
+    color: #FFFFFF;
     cursor: pointer;
 }
 
@@ -94,7 +100,7 @@
     margin: 0 0 12px 0;
     padding: 0 8px;
     font-size: 18px;
-    color: #30343b;
+    color: #212529; /* 텍스트 블랙 */
 }
 
 /* 상단 우측 액션 (내 정보 관리 / 로그아웃) */
@@ -107,7 +113,7 @@
     padding: 8px 12px;
     border: 1px solid #cfd8e3;
     border-radius: 10px;
-    background: #fff;
+    background: #FFFFFF;
     color: #334155;
 }
 
@@ -121,7 +127,7 @@
     border: 1px solid #d9dee5;
     border-radius: 10px;
     padding: 10px 12px;
-    background: #fff;
+    background: #FFFFFF;
 }
 
 /* 상담 카드 리스트 */
@@ -134,7 +140,7 @@
 }
 
 .mp-card {
-    background: #fff;
+    background: #FFFFFF;
     border-radius: 14px;
     box-shadow: 0 4px 16px rgba(16,24,40,.06);
     padding: 14px 16px;
@@ -149,7 +155,7 @@
 }
 
 .mp-card-meta { display: flex; gap: 10px; align-items: center; }
-.mp-date { font-size: 12px; color: #7a828e; }
+.mp-date { font-size: 12px; color: #adb5bd; } /* 라이트 그레이 */
 
 .mp-risk {
     font-size: 12px;
@@ -167,9 +173,9 @@
 .mp-card-title {
     margin: 6px 0 2px 0;
     font-size: 16px;
-    color: #23262b;
+    color: #212529; /* 텍스트 블랙 */
 }
-.mp-card-sub { font-size: 13px; color: #7a828e; }
+.mp-card-sub { font-size: 13px; color: #6c757d; } /* 미디엄 그레이 */
 
 .mp-tags { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
 
@@ -198,7 +204,7 @@
 .mp-profile-card {
     position: sticky;
     top: 20px;
-    background: #fff;
+    background: #FFFFFF;
     border-radius: 14px;
     border: 1px solid #eef1f5;
     box-shadow: 0 4px 16px rgba(16,24,40,.06);
@@ -212,8 +218,8 @@
     margin-bottom: 12px;
 }
 
-.mp-user-name { font-weight: 700; color: #1f2937; }
-.mp-user-sub  { font-size: 12px; color: #6b7280; }
+.mp-user-name { font-weight: 700; color: #212529; }  /* 텍스트 블랙 */
+.mp-user-sub  { font-size: 12px; color: #6c757d; }  /* 미디엄 그레이 */
 
 .mp-quick {
     list-style: none;
@@ -224,17 +230,17 @@
 }
 
 .link {
-    background: transparent; border: none; color: #3563e9; cursor: pointer; padding: 0;
+    background: transparent; border: none; color: #00AEEF; cursor: pointer; padding: 0; /* 선명한 파랑 */
 }
 .link-ghost {
-    background: transparent; border: none; color: #1f7a46; cursor: pointer; font-size: 13px;
+    background: transparent; border: none; color: #26D0A9; cursor: pointer; font-size: 13px; /* 생동감 있는 초록 */
 }
 
 /* ===== 버튼 공통 ===== */
 .btn-primary {
     border: none;
-    background: #2f81f7;
-    color: #fff;
+    background: #00AEEF;  /* 선명한 파랑 */
+    color: #FFFFFF;
     padding: 10px 12px;
     border-radius: 10px;
     cursor: pointer;
@@ -242,7 +248,7 @@
 }
 .btn-outline {
     border: 1px solid #cfd8e3;
-    background: #fff;
+    background: #FFFFFF;
     color: #334155;
     padding: 8px 12px;
     border-radius: 10px;
@@ -251,7 +257,7 @@
 .btn-ghost {
     border: none;
     background: transparent;
-    color: #3563e9;
+    color: #00AEEF;  /* 선명한 파랑 */
     padding: 8px 10px;
     border-radius: 10px;
     cursor: pointer;
@@ -259,17 +265,43 @@
 
 /* 모달 최소 스타일 */
 .mp-modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,.35); display:flex; align-items:center; justify-content:center; z-index:50; }
-.mp-modal { width:min(760px, 92vw); background:#fff; border-radius:12px; padding:16px 18px; box-shadow:0 10px 30px rgba(0,0,0,.18); }
+.mp-modal {
+    width:min(760px, 92vw);
+    background:#FFFFFF;
+    border-radius:12px;
+    padding:16px 18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+
+    /* 모달을 세로 플렉스 컨테이너로 */
+    display:flex;              /* 추가 */
+    flex-direction:column;     /* 추가 */
+}
 .mp-modal-head { display:flex; align-items:center; justify-content:space-between; }
 .mp-modal-close { border:none; background:none; font-size:22px; line-height:1; cursor:pointer; }
-.mp-modal-form { display:flex; flex-direction:column; gap:14px; }
+
+/* 폼이 가운데 영역을 차지하도록 */
+.mp-modal-form {
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    flex:1;                    /* 추가: 남는 높이를 차지 */
+}
+
 .mp-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .mp-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
 .mp-divider { border:none; border-top:1px solid #eee; margin:6px 0; }
 .mp-subtitle { margin:0; font-size:14px; color:#333; }
-.mp-modal-actions { display:flex; gap:8px; justify-content:flex-end; }
 
-.hint { font-size:12px; color:#666; margin-top:4px; }
+/* 버튼 영역: 아래+오른쪽 정렬 */
+.mp-modal-actions {
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;  /* 오른쪽 정렬 */
+    margin-top:auto;           /* 아래로 밀착 */
+    padding-top:8px;           /* 위쪽 여백 */
+}
+
+.hint { font-size:12px; color:#6c757d; margin-top:4px; }  /* 미디엄 그레이 */
 .error { font-size:12px; color:#d32f2f; margin-top:4px; }
 
 /* =========================
@@ -303,34 +335,33 @@
     transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
     box-sizing: border-box;
 }
-.mp-modal .field input::placeholder { color:#9ca3af; }
+.mp-modal .field input::placeholder { color:#6c757d; } /* 미디엄 그레이 */
 
 /* 포커스 상태 */
 .mp-modal .field input:focus {
     outline: 0;
-    border-color: #93c5fd;
-    box-shadow: 0 0 0 3px rgba(147,197,253,.35);
-    background: #fff;
+    border-color: #00AEEF; /* 선명한 파랑 */
+    box-shadow: 0 0 0 3px rgba(0,174,239,.35); /* 파랑 글로우 */
+    background: #FFFFFF;
 }
 
 /* 읽기전용(아이디) */
 .mp-modal .field input[readonly] {
     background: #f3f4f6;
-    color: #6b7280;
+    color: #6c757d; /* 미디엄 그레이 */
     cursor: not-allowed;
 }
 
 /* 도움말/에러 */
-.mp-modal .hint  { margin-top: 6px; font-size: 12px; color: #6b7280; }
+.mp-modal .hint  { margin-top: 6px; font-size: 12px; color: #6c757d; } /* 미디엄 그레이 */
 .mp-modal .error { margin-top: 6px; font-size: 12px; color: #dc2626; }
 
 /* 구분선/액션 영역 */
-.mp-modal .mp-divider { margin: 12px 0; border-top-color:#eef2f7; }
-.mp-modal-actions { padding-top: 8px; }
+/* (위에서 .mp-modal-actions 에 padding-top 포함) */
 
 /* 버튼(모달 안) 톤 맞춤 */
-.mp-modal .btn-primary { background:#22c55e; border:1px solid #22c55e; }
-.mp-modal .btn-primary:hover { filter: brightness(.96); }
+.mp-modal .btn-primary { background:#00AEEF; border:1px solid #00AEEF; }
+.mp-modal .btn-primary:hover { filter: brightness(.95); }
 .mp-modal .btn-ghost { color:#374151; }
 
 /* 필수표시 색상(이미 html에 <span class="req">*</span> 있음) */

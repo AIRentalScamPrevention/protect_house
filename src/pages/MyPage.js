@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import "./MyPage.css";
+import BrandLogo from "../image/logo.png";
 
 export default function MyPage() {
     const { user, logout } = useAuth();
@@ -74,10 +75,10 @@ export default function MyPage() {
         <div className="mp-layout">
             {/* 좌측 사이드바 */}
             <aside className="mp-sidebar">
-                {/* 로고 클릭 시 홈으로 이동 */}
-                <button className="mp-logo" onClick={() => nav("/")} aria-label="홈으로 이동">
-                    로고
-                </button>
+                {/* 로고 이미지 (홈으로 이동) */}
+                   <Link to="/" className="mp-logo" aria-label="홈으로 이동">
+                     <img src={BrandLogo} alt="안심하.zip" className="mp-logo-img" />
+                   </Link>
 
                 <nav className="mp-nav">
                     <button onClick={() => nav("/")} className="mp-nav-item">
@@ -282,7 +283,7 @@ function InfoModal({ user, onClose, onSaved }) {
                         <div className="field">
                             <label htmlFor="username">아이디</label>
                             <input id="username" name="username" value={form.username} readOnly />
-                            <p className="hint">아이디는 변경할 수 없습니다.</p>
+                            <p className="error">아이디는 변경할 수 없습니다.</p>
                         </div>
 
                         <div className="field">
@@ -304,7 +305,7 @@ function InfoModal({ user, onClose, onSaved }) {
 
                     <hr className="mp-divider" />
 
-                    <h4 className="mp-subtitle">비밀번호 변경 (선택)</h4>
+                    <h4 className="mp-subtitle">비밀번호 변경</h4>
                     <div className="mp-grid-3">
                         <div className="field">
                             <label htmlFor="currentPassword">현재 비밀번호</label>
@@ -328,8 +329,14 @@ function InfoModal({ user, onClose, onSaved }) {
                                 onChange={onChange}
                                 placeholder="8자 이상"
                             />
-                            {errors.newPassword ? <p className="error">{errors.newPassword}</p> : <p className="hint">8자 이상 입력해주세요.</p>}
+                            {/* 1) 제출 유효성 에러가 있으면 그걸 우선 보여주고 */}
+                            {errors.newPassword && <p className="error">{errors.newPassword}</p>}
+                            {/* 2) 그 외엔, 입력이 있고 8자 미만일 때만 빨간 안내 노출 */}
+                            {!errors.newPassword && form.newPassword.length > 0 && form.newPassword.length < 8 && (
+                                <p className="error">8자 이상 입력해주세요.</p>
+                            )}
                         </div>
+
                         <div className="field">
                             <label htmlFor="newPasswordConfirm">새 비밀번호 확인</label>
                             <input
@@ -341,7 +348,6 @@ function InfoModal({ user, onClose, onSaved }) {
                                 placeholder="새 비밀번호 재입력"
                             />
                             {errors.newPasswordConfirm && <p className="error">{errors.newPasswordConfirm}</p>}
-                        </div>
                     </div>
 
                     <div className="mp-modal-actions">
@@ -349,8 +355,9 @@ function InfoModal({ user, onClose, onSaved }) {
                             닫기
                         </button>
                         <button type="submit" className="btn-primary">
-                            저장
+                            확인
                         </button>
+                    </div>
                     </div>
                 </form>
             </div>
