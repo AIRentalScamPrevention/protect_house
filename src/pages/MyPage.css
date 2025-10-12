@@ -41,7 +41,7 @@
     color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    padding: 18px 14px;
+    padding: 0 14px 18px;
     height: 100vh;
 }
 
@@ -49,7 +49,7 @@
     font-weight: 800;
     letter-spacing: .5px;
     font-size: 22px;
-    margin: 6px 8px 16px;
+    margin: 0 8px 0px;
     background: transparent;
     border: none;
     color: #FFFFFF;
@@ -59,7 +59,7 @@
 }
 
 .mp-logo img {
-    height: 70px; /* ← 크기 줄이기 (필요 시 28px 정도도 깔끔) */
+    height: 100px; /* ← 크기 줄이기 (필요 시 28px 정도도 깔끔) */
     width: auto;
     display: block;
 }
@@ -391,4 +391,44 @@
         padding: 0 12px;
     }
     .mp-sidebar { display: none; }
+}
+
+/* 비밀번호 필드 감싸는 래퍼 */
+.password-field-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 래퍼 안의 input은 100% 너비 */
+.password-field-wrapper input {
+    width: 100%;
+    /* 아이콘이 들어갈 공간을 위해 오른쪽 패딩 추가 */
+    padding-right: 40px;
+}
+
+/* 비밀번호 표시/숨김 토글 버튼 (아이콘용) */
+.password-toggle-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px; /* 클릭 영역 확보 */
+
+    /* 버튼 기본 스타일 리셋 */
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+
+    /* 아이콘 정렬 및 색상 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd; /* 아이콘 기본 색상 (라이트 그레이) */
+}
+
+.password-toggle-btn:hover {
+    color: #495057; /* 마우스 올렸을 때 아이콘 색상 (진한 그레이) */
 }

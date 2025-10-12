@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"; // ← Link 추가
 import { useAuth } from "../auth/AuthContext";
 import SignupModal from "../auth/SignupModal";
 import "./Login.css";
-import BrandLogo from "../image/logo.png";
+import BrandLogo from "../image/Logo.png";
 
 export default function Login() {
     const { login, user } = useAuth(); // user 가져와서 링크 노출 제어에 사용 가능

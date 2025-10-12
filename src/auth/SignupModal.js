@@ -209,7 +209,8 @@ export default function SignupModal({ onClose }) {
                                 }))
                             }
                         >
-                            <option value="">선택 안 함</option>
+                            {/* ✅ '선택 안 함'을 비활성화된 안내 문구로 변경했습니다 */}
+                            <option value="" disabled>선호 유형을 선택하세요</option>
                             {PREFER_OPTIONS.map((opt) => (
                                 <option key={opt} value={opt}>
                                     {opt}

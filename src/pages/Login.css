@@ -6,12 +6,12 @@
     --primary: #00AEEF;  /* 💧 선명한 파랑 (기본 버튼/링크) */
 
     /* 헤더/푸터 */
-    --header-h: 56px;     /* 헤더 높이 */
+    --header-h: 68px;     /* 헤더 높이 */
     --footer-h: 48px;     /* 푸터 높이 */
     --header-bg: #1A2E4D; /* 상단바 배경(딥 네이비) */
 
     /* 로고 크기 (필요시 숫자만 조정: 28~40px 권장) */
-    --logo-h: 32px;
+    --logo-h: 100px;
 }
 
 /* 카드 박스가 확실히 보이도록 강제 */
@@ -63,14 +63,12 @@
     font-weight: 600 !important;
 }
 
-/* ===== 헤더: 전체폭 고정 + 우측 메뉴 정렬 + 레이어 우선순위 ===== */
-
 /* 상단 헤더를 뷰포트 가로 전체로 고정 */
 .login-header{
     position: fixed;
     top: 0; left: 0; right: 0;
     height: var(--header-h);
-    padding: 0 24px;
+    padding:  0 28px 0 4px;
     display: flex !important;
     align-items: center;
     gap: 16px;
@@ -91,15 +89,15 @@
 .brand-link{
     display: inline-flex;
     align-items: center;
+    margin-left: 0;
 }
 
 .site-logo {
-    height: 85px; /* ← 원하는 높이 직접 입력 */
+    height: var(--logo-h);
     width: auto;
     display: block;
 }
 
-/* 메뉴를 오른쪽 끝으로 강제 밀기 */
 .nav-menu{
     margin-left: auto !important;
     display: flex !important;
@@ -160,7 +158,14 @@
     cursor: pointer;
     outline: none;
     appearance: none;
+    transition: color .15s ease; /* 부드러운 색상 전환 효과 */
 }
+
+/* ✅ 추가된 부분 */
+.login-footer .signup-link:hover {
+    color: var(--primary); /* 기본 링크/버튼 색상으로 변경 */
+}
+
 .login-footer .signup-link:focus-visible {
     outline: 2px solid rgba(10, 35, 66, 0.8);  /* 딥네이비 포커스 링 */
     outline-offset: 2px;
@@ -181,5 +186,5 @@
 
 /* 선택: 큰 화면에서 로고 조금 더 키우고 싶을 때 */
 @media (min-width: 1024px) {
-    :root { --logo-h: 36px; }
+    :root { --logo-h: 110px; }
 }
