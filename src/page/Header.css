@@ -1,0 +1,80 @@
+/* 헤더 전체 */
+.lk-header {
+    background: #fff;
+    border-bottom: 1px solid #eef0f3 ;
+    position: sticky; /* 스크롤 해도 상단 고정 */
+    top: 0;
+    z-index: 50;
+}
+
+/* 헤더 내부 레이아웃 */
+.lk-header__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 16px;
+}
+
+/* 로고 스타일 */
+.lk-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #111827;
+    font-weight: 800;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.lk-logo__mark { font-size: 18px; }
+
+/* 우측 버튼 영역 */
+.lk-actions {
+    margin-left: auto; /* 오른쪽 끝으로 밀기 */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 로그인/로그아웃 버튼 */
+.lk-btn {
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 8px 14px;
+    cursor: pointer;
+    border: 1px solid #d1d5db;
+    background: #fff;
+}
+.lk-btn--ghost:hover { background: #f3f4f6; }
+.lk-btn--solid {
+    background: #111827;
+    color: #fff;
+    border-color: #111827;
+}
+.lk-btn--solid:hover { filter: brightness(1.1); }
+
+/* 마이페이지 버튼*/
+.lk-link {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #374151;
+    padding: 8px 10px;
+    border-radius: 10px;
+}
+.lk-link:hover { background: #f3f4f6; }
+
+/* ?(가이드) 버튼 */
+.lk-iconbtn {
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+}
+.lk-inconbtn:hover { background: #f9fafb; }
