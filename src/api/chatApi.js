@@ -29,11 +29,29 @@ async function jsonFetch(url, { method = "GET", headers = {}, body, timeoutMs = 
 export async function sendMessage(messages, options = {}) {
     return jsonFetch(`${API_BASE}/api/chat`, {
         method: "POST",
-        body: { messages,...(options.payload || {}) },
+        body: {messages, ...(options.payload || {})},
         timeoutMs: options.timeoutMs ?? 60000,
         headers: options.headers || {}, // 필요 시 인증 헤더 등
     });
 }
+
+//이미지 파일 분석 요청
+export const analyzeDocument = async (file, message) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('message', message);
+    const response = await fetch(`${API_BASE}/api/analyze-document`, {
+        method :'POST',
+        body : formData,
+    });
+
+    if (!response.ok) {
+        const errorBody = await response.json().catch(() => ({ error: "알 수 없는 서버 오류" }));
+        throw new Error(errorBody.error || `HTTP 오류: ${response.status}`);
+    }
+
+    return response.json();
+};
 
 /**
  * 2) 스트리밍 요청(SSE): GET /api/chat/stream

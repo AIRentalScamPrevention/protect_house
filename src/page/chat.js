@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./chat.css";
 import ListingTypeSelector from "../components/ListingTypeSelector";
 import { sendMessage, streamMessage } from "../api/chatApi";
-
+import {analyzeDocument} from "../api/chatApi";
 
 /* 채팅 화면 컴포넌트
  * - 초기: 중앙 큰 입력창 + ListingTypeSelector (월세/전세/매매 선택)
@@ -13,33 +13,73 @@ export default function Chat() {
     const [input, setInput] = useState(""); // 입력창 값
     const [busy, setBusy] = useState(false); // 전송 중 상태 표시
 
-    // 메시지 보내기 함수
-    const onSend = async () => {
-        const t = input.trim();
-        if (!t || busy) return;
+    //파일 처리를 위한 새로운 상태와 ref
+    const [imageFile, setImageFile] = useState(null);
+    const fileInputRef = useRef(null);
 
-        // 사용자 메시지 먼저 추가
-        const base = [...messages, { role: "user", text: t }];
-        setMessages(base);
-        setInput("");
-        setBusy(true);
+    //파일 입력을 실행하는 함수
+    const handleAttachClick = () =>{
+        if (busy) return;
+        fileInputRef.current.click();
+    };
 
-        try {
-            // 서버로 메시지 전송 (단발 응답)
-            const wireMsgs = base.map((m) => ({role: m.role, content: m.text }));
-            const { reply } = await sendMessage(wireMsgs); // 실제 API 응답
-            setMessages([...base, { role: "assostant", text:reply }]);
-        } catch (e) {
-            // 에러 발생 시 표시
-            setMessages([
-                ...base,
-                {role: "assistant", text: `에러: ${e.message}` },
-            ]);
-        } finally {
-            setBusy(false);
+    // 파일 선택 처리 함수
+    const handleFileChange =(event)=>{
+        const file = event.target.files[0];
+        if (file){
+            setImageFile(file);
+            setInput("");
         }
     };
 
+    // 메시지 보내기 함수
+    const onSend = async () => {
+        const t= input.trim();
+        if (!t&&imageFile) return;
+        if (busy) return;
+
+        setBusy(true);
+
+        //이미지
+        if (imageFile){
+            const imageUrl = URL.createObjectURL(imageFile);
+            const base = [...messages, {role : "user", type : "image", content : imageUrl}];
+            setMessages((base));
+            setBusy(true);
+
+            try {
+                const {reply} =await analyzeDocument(imageFile);
+                setMessages([...base, {role : "assistant", type : "text", content : reply}]);
+            }
+            catch (e) {
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    { role: "assistant", type: "text", content: `에러: ${e.message}` }, // e.message() -> e.message
+                ]);
+            }
+            finally {
+                setImageFile(null);
+            }
+        }
+        // 텍스트
+        else {
+            const  base = [...messages, {role : "user", type : "text", content : t}];
+            setMessages(base);
+
+            try {
+                const wireMsgs = base.map((m)=>({role : m.role, content : m.content}));
+                const {reply}=await sendMessage(wireMsgs);
+                setMessages([...base, {role : "assistant", type : "text", content : reply}]);
+            }catch (e){
+                setMessages([...base, { role: "assistant", type: "text", content: `에러: ${e.message}` }]);
+            }
+        }
+        setInput("");
+        setBusy(false);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = null;
+        }
+    };
 
     // Enter 키로 전송
     const onKeyDown = (e) => {
@@ -64,28 +104,37 @@ export default function Chat() {
         <section className="chat-page">
             {hasMessages ? (
                 <div className="chat-stream">
-                    {messages.map((m, i) => (
-                        <div key={i} className={`bubble ${m.role}`}>{m.text}</div>
+                    {messages.map((m, i)=>(
+                        <div key={i} className={`bubble ${m.role}`}>
+                            {m.type === 'image' ? <img src={m.content} alt="uploaded content"/> : m.content}
+                        </div>
                     ))}
                 </div>
             ) : (
-                <ListingTypeSelector onSelect={handleSelectType} />
+                <ListingTypeSelector onSelect={{handleSelectType}}/>
             )}
-
-            {/* 하단: 입력바는 항상 표시 */}
             <div className="chat-input">
-        <textarea
-            rows={2}
-            placeholder="메시지를 입력하세요."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={onKeyDown}
-            disabled={busy} // 전송 중이면 입력 비활성화
-        />
+                <button className="attach-btn" onClick={handleAttachClick} disabled={busy}>+</button>
+
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{display : 'none'}}
+                    accept="image/*,application/pdf"
+                    onChange={handleFileChange}
+                />
+
+                <textarea
+                    rows={1}
+                    placeholder={imageFile ? imageFile.name : "메시지를 입력하세요/"}
+                    value={input}
+                    onChange={(e)=> setInput(e.target.value)}
+                    onKeyDown={onKeyDown}
+                    disabled={busy}
+                />
                 <button className="send-btn" onClick={onSend} disabled={busy}>
                     {busy ? "..." : "➤"}
                 </button>
-
             </div>
         </section>
     );

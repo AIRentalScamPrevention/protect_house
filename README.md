@@ -116,5 +116,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 - **Infra/Tool**  
   ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
-
->>>>>>> ed4974546c668f382bf94aea532fa31813d412d6
