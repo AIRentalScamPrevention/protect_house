@@ -102,39 +102,55 @@ export default function Chat() {
 
     return (
         <section className="chat-page">
-            {hasMessages ? (
-                <div className="chat-stream">
-                    {messages.map((m, i)=>(
-                        <div key={i} className={`bubble ${m.role}`}>
-                            {m.type === 'image' ? <img src={m.content} alt="uploaded content"/> : m.content}
-                        </div>
-                    ))}
+            {/* ▼▼▼ 1. 중앙 콘텐츠 영역을 감싸는 div 추가 ▼▼▼ */}
+            <div className="chat-content-area">
+                {hasMessages ? (
+                    <div className="chat-stream">
+                        {messages.map((m, i) => (
+                            <div key={i} className={`bubble ${m.role}`}>
+                                {m.type === "image" ? (
+                                    <img src={m.content} alt="uploaded content" />
+                                ) : (
+                                    m.content
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    // ListingTypeSelector는 이제 chat-content-area 안에서 중앙 정렬됩니다.
+                    <ListingTypeSelector onSelect={handleSelectType} />
+                )}
+            </div>
+            {/* ▲▲▲ 여기까지 ▲▲▲ */}
+
+
+            {/* ▼▼▼ 2. 하단 입력창 전체를 감싸는 div 추가 ▼▼▼ */}
+            <div className="chat-input-container">
+                <div className="chat-input">
+                    <button className="attach-btn" onClick={handleAttachClick} disabled={busy}>
+                        +
+                    </button>
+
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        style={{ display: "none" }}
+                        accept="image/*,application/pdf"
+                        onChange={handleFileChange}
+                    />
+
+                    <textarea
+                        rows={1}
+                        placeholder={imageFile ? imageFile.name : "메시지를 입력하세요/"}
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={onKeyDown}
+                        disabled={busy}
+                    />
+                    <button className="send-btn" onClick={onSend} disabled={busy}>
+                        {busy ? "..." : "➤"}
+                    </button>
                 </div>
-            ) : (
-                <ListingTypeSelector onSelect={{handleSelectType}}/>
-            )}
-            <div className="chat-input">
-                <button className="attach-btn" onClick={handleAttachClick} disabled={busy}>+</button>
-
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{display : 'none'}}
-                    accept="image/*,application/pdf"
-                    onChange={handleFileChange}
-                />
-
-                <textarea
-                    rows={1}
-                    placeholder={imageFile ? imageFile.name : "메시지를 입력하세요/"}
-                    value={input}
-                    onChange={(e)=> setInput(e.target.value)}
-                    onKeyDown={onKeyDown}
-                    disabled={busy}
-                />
-                <button className="send-btn" onClick={onSend} disabled={busy}>
-                    {busy ? "..." : "➤"}
-                </button>
             </div>
         </section>
     );

@@ -104,16 +104,27 @@
     align-items: center;
     gap: 18px;
 }
-.nav-link{
-    color: #adb5bd;
+
+.nav-link {
+    /* [수정] 기본 글씨 색상을 흰색으로 변경 */
+    color: #FFFFFF;
+    /* [추가] 글씨를 굵게 만듭니다 */
+    font-weight: bold;
+
     text-decoration: none;
     font-size: 14px;
-    transition: color .15s ease;
+    padding: 8px 12px; /* 호버 효과를 위해 여백을 줍니다 */
+    border-radius: 4px; /* 호버 효과의 배경을 둥글게 만듭니다 */
+    transition: background-color .15s ease;
 }
-.nav-link:hover{ color: #FFFFFF; }
-.nav-link:focus-visible{
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.nav-link:focus-visible {
     color: #FFFFFF;
-    outline: 2px solid rgba(255,255,255,.45);
+    outline: 2px solid rgba(255, 255, 255, .45);
     outline-offset: 2px;
     border-radius: 4px;
 }

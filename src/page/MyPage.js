@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import "./MyPage.css";
-import BrandLogo from "../image/image.png"; // 사용자님의 기존 이미지 경로 유지
+import BrandLogo from "../image/image.png";
 
 /* =========================
    1. 비밀번호 변경 모달 (아이콘 적용된 최종 버전)
@@ -65,7 +65,6 @@ function PasswordChangeModal({ onClose, onSaved }) {
         }
     };
 
-    // ✅ SVG 아이콘 정의
     const EyeOpenIcon = () => (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />

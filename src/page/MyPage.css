@@ -22,7 +22,7 @@
     grid-template-areas: "sidebar content profile";
     gap: 24px;
 
-    align-items: start;
+    align-items: stretch;
     min-height: 100vh;
     background: #F8F9FA; /* 배경 그레이 */
 }
@@ -42,7 +42,9 @@
     display: flex;
     flex-direction: column;
     padding: 0 14px 18px;
-    height: 100vh;
+    height: 100vh;         /* 1. 화면 높이에 꽉 차도록 높이를 지정합니다. */
+    position: sticky;      /* 2. 스크롤 할 때 '고정'되도록 만듭니다. */
+    top: 0;
 }
 
 .mp-logo {
@@ -93,7 +95,7 @@
 /* ===== 가운데 콘텐츠 ===== */
 .mp-content {
     grid-area: content;
-    padding: 28px 0;
+    padding: 0 0 28px 0;
 }
 
 .mp-section-title {
@@ -198,7 +200,7 @@
 /* ===== 우측 프로필 ===== */
 .mp-profile {
     grid-area: profile;
-    padding: 28px 14px 28px 0;
+    padding: 0 14px 28px 0;
 }
 
 .mp-profile-card {
