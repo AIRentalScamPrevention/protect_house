@@ -106,15 +106,16 @@
 }
 
 .nav-link {
-    /* [수정] 기본 글씨 색상을 흰색으로 변경 */
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
     color: #FFFFFF;
-    /* [추가] 글씨를 굵게 만듭니다 */
     font-weight: bold;
-
     text-decoration: none;
     font-size: 14px;
-    padding: 8px 12px; /* 호버 효과를 위해 여백을 줍니다 */
-    border-radius: 4px; /* 호버 효과의 배경을 둥글게 만듭니다 */
+    padding: 8px 12px;
+    border-radius: 4px;
     transition: background-color .15s ease;
 }
 

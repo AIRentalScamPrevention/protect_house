@@ -24,8 +24,8 @@
     color: white;
 }
 body {
-    margin: 0;                 /* 불필요한 바깥 여백 제거 */
-    padding: 0;                /* 안쪽 여백(padding-top 포함) 모두 제거 */
+    margin: 0;
+    padding: 0;
 }
 .App-link {
     color: #61dafb;

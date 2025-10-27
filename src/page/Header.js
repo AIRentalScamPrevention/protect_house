@@ -16,9 +16,7 @@ export default function Header() {
                 {user ? (
                     <>
                         <Link to="/MyPage" className="nav-link">마이페이지</Link>
-                        <button className="nav-link" onClick={logout} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 'inherit' }}>
-                            로그아웃
-                        </button>
+                        <button className="nav-link">로그아웃</button>
                     </>
                 ) : (
                     <Link to="/login" className="nav-link">로그인</Link>

@@ -229,8 +229,8 @@ export default function MyPage() {
 
                 <nav className="mp-nav">
                     <button onClick={() => nav("/")} className="mp-nav-item">🏠 홈</button>
-                    <button className="mp-nav-item" onClick={() => nav("/status")}>📊 검증현황</button>
                     <button className="mp-nav-item active" onClick={() => nav("/mypage")}>📂 상담 이력</button>
+                    <button className="mp-nav-item" onClick={() => nav("/documents")}>📄 내 문서함</button>
                 </nav>
             </aside>
 
