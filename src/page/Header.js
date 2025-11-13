@@ -23,6 +23,7 @@ export default function Header() {
                 ) : (
                     <Link to="/login" className="nav-link">로그인</Link>
                 )}
+                <Link to="/Guide" className="nav-link">가이드</Link>
             </nav>
         </header>
     );

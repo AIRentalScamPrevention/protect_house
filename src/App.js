@@ -7,6 +7,7 @@ import Login from "./page/Login";
 import MyPage from "./page/MyPage";
 import Header from "./page/Header"; // 첫 번째 코드에서 가져옴
 import Chat from "./page/chat";    // 첫 번째 코드에서 가져옴
+import Guide from "./page/Guide";
 import "./App.css";
 
 // --- Helper Components ---
@@ -54,7 +55,14 @@ export default function App() {
                             </PrivateRoute>
                         }
                     />
-
+                    <Route
+                        path="/guide"
+                        element={
+                            <PrivateRoute>
+                                <Guide />
+                            </PrivateRoute>
+                        }
+                    />
                     {/* 기존 마이페이지 라우트 (보호) */}
                     <Route
                         path="/mypage"

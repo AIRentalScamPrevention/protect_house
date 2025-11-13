@@ -1,5 +1,5 @@
 import React from "react";
-import "./guide.css";
+import "./Guide.css";
 
 /**
  * 전세사기 예방 가이드 - 필수 준비 서류 목록 + 발급 방법
