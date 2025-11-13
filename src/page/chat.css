@@ -18,7 +18,7 @@
     flex-direction: column;     /* 아이템을 세로로 정렬 */
     padding: 24px; /* 기존 패딩 유지 */
     overflow-y: auto;           /* 채팅 길어지면 스크롤 */
-    position: relative;         /* 내부 요소 절대 위치 지정을 위해 추가 */
+          /* 내부 요소 절대 위치 지정을 위해 추가 */
     min-height: 0;
     justify-content: center;
 }
@@ -99,6 +99,50 @@
     padding: 16px 24px;
     border-top: 1px solid #e5e7eb;
     background-color: #F8F9FA;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.file-preview-chip {
+    display: inline-flex; /* 내용물 크기만큼만 차지 */
+    align-items: center;
+    background-color: #e9ecef; /* 밝은 회색 */
+    border: 1px solid #d1d5db; /* 입력창과 비슷한 테두리 */
+    border-radius: 16px;
+    padding: 4px 8px 4px 12px;
+    font-size: 14px;
+    color: #333;
+    max-width: 300px; /* 너무 길어지지 않게 */
+    align-self: flex-start; /* 왼쪽 정렬 */
+}
+
+.file-preview-chip span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 파일 이름 길면 ... 처리 */
+    margin-right: 8px;
+}
+
+.file-preview-chip button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; /* 동그란 X 버튼 */
+    border: none;
+    background-color: #adb5bd; /* 회색 */
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0;
+}
+
+.file-preview-chip button:hover {
+    background-color: #868e96; /* 더 진한 회색 */
 }
 
 .chat-input {
@@ -108,6 +152,7 @@
     background-color: #fff;
     border: 1px solid #d1d5db;
     border-radius: 14px;
+    position: relative;
     padding: 8px;
 }
 
@@ -159,4 +204,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.drop-overlay {
+    position: absolute;
+    z-index: 10;
+    top: -50px; /* ▼▼▼ 0에서 -50px로 수정 (원하는 만큼 조절) ▼▼▼ */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+
+    background-color: rgba(239, 246, 254, 0.45);
+    border: 3px dashed #3b82f6;
+    border-radius: 14px; /* ▼▼▼ 0에서 14px로 수정 (입력창과 맞춤) ▼▼▼ */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    /* ... (이하 flex 속성, 수정 없음) ... */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #3b82f6;
+    font-size: 1.25rem;
+    font-weight: bold;
+    pointer-events: none;
 }

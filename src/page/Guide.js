@@ -37,7 +37,7 @@ export default function Guide() {
                 <h2>필수 준비 서류 목록</h2>
                 <p className="muted">
                     아래 각 항목을 클릭하면 <strong>어디서 발급</strong>하고 <strong>어떻게 신청</strong>하는지,
-                    <strong>유의사항</strong>까지 펼쳐서 볼 수 있어요.
+                     <strong>유의사항</strong>까지 펼쳐서 볼 수 있어요.
                 </p>
 
                 <div className="cards">
@@ -50,7 +50,7 @@ export default function Guide() {
                         <div className="card-body">
                             <div className="row">
                                 <div>
-                                    <h4> 어디서 발급 받나요 ?</h4>
+                                    <h4> 어디서 발급 받나요?</h4>
                                     <ul>
                                         <li><strong>정부24</strong> 또는 <strong>인터넷등기소</strong>(온라인)</li>
                                         <li><strong>등기소/법원 민원실</strong>(오프라인)</li>
@@ -82,7 +82,7 @@ export default function Guide() {
                         <div className="card-body">
                             <div className="row">
                                 <div>
-                                    <h4>어디서 발급 받나요 ?</h4>
+                                    <h4>어디서 발급 받나요?</h4>
                                     <ul>
                                         <li><strong>정부24</strong>(온라인)</li>
                                         <li><strong>구청/주민센터</strong>(오프라인)</li>
@@ -113,7 +113,7 @@ export default function Guide() {
                         <div className="card-body">
                             <div className="row">
                                 <div>
-                                    <h4>어디서 발급 받나요 ?</h4>
+                                    <h4>어디서 발급 받나요?</h4>
                                     <ul>
                                         <li><strong>인감증명서/위임장</strong>: 주민센터(오프라인, 본인/대리 요건 유의)</li>
                                     </ul>
@@ -143,7 +143,7 @@ export default function Guide() {
                         <div className="card-body">
                             <div className="row">
                                 <div>
-                                    <h4>확정일자 어디서 받나요 ?</h4>
+                                    <h4>확정일자 어디서 받나요?</h4>
                                     <ul>
                                         <li><strong>주민센터</strong> 방문(계약서 원본 지참)</li>
                                         <li>전자계약의 경우 <strong>부동산거래관리시스템</strong> 통해 처리</li>
@@ -174,7 +174,7 @@ export default function Guide() {
                         <div className="card-body">
                             <div className="row">
                                 <div>
-                                    <h4>어디서 발급 받나요 ?</h4>
+                                    <h4>어디서 발급 받나요?</h4>
                                     <ul>
                                         <li><strong>정부24</strong> (온라인) - 전입신고 접수 후 발급 가능</li>
                                         <li><strong>주민센터</strong> (오프라인)</li>
@@ -204,7 +204,7 @@ export default function Guide() {
                         <div className="card-body">
                             <div className="row">
                                 <div>
-                                    <h4>어디서 가입/발급 받나요 ?</h4>
+                                    <h4>어디서 가입/발급 받나요?</h4>
                                     <ul>
                                         <li><strong>HUG(주택도시보증공사)</strong>,<strong>SGI서울보증</strong></li>
                                         <li>온라인 사전조회 후 창구/대행사 통해 접수</li>

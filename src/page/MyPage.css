@@ -248,14 +248,21 @@
     cursor: pointer;
     font-weight: 600;
 }
-.btn-outline {
+.btn-outline1 {
     border: 1px solid #cfd8e3;
     background: #FFFFFF;
     color: #334155;
     padding: 8px 12px;
     border-radius: 10px;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
+
+.btn-outline1:hover {
+    background-color: #f7f9fc; /* 아주 연한 하늘색/회색 */
+    border-color: #bacadc;     /* 기존 테두리보다 살짝 진하게 */
+}
+
 .btn-ghost {
     border: none;
     background: transparent;

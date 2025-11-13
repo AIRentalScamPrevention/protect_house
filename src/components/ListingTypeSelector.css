@@ -45,18 +45,40 @@
     box-shadow: 0 8px 22px rgba(249,115,22,.30); /* 그림자 색 */
 }
 
-
-/* 좌상단 선택 점 */
+/* 1. 기본 스타일 (선택 안 됨) */
 .lts-dot {
     align-self: center;
-    width: 22px; height: 22px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    border: 2px solid #d1d5db;
+    border: 2px solid #d1d5db; /* 기본 회색 테두리 */
+    background: #fff;
+    transition: border-color 0.2s ease;
+    position: relative;
+    display: grid; /* 겸사겸사 수직정렬도 깔끔하게 */
+    place-items: center;
 }
 
+.lts-dot::after {
+    content: ''; /* 필수 */
+    position: absolute; /* .lts-dot 안에 떠있도록 */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #f97316; /* 점 색깔은 주황색 */
+
+    /* ▼ 평소엔 숨김 (크기를 0으로) */
+    transform: scale(0);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* 3. 선택된 스타일 (.on) */
 .lts-dot.on {
-    background: #f97316;
     border-color: #f97316;
+}
+
+.lts-dot.on::after {
+    transform: scale(1);
 }
 
 /* 카드 본문 텍스트 */
