@@ -106,7 +106,7 @@
 }
 
 /* 상단 우측 액션 (내 정보 관리 / 로그아웃) */
-.mp-content-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.mp-content-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; margin-top: 20px; }
 .mp-actions-right { display:flex; gap:8px; align-items:center; }
 
 /* 상단 우측에 배치되는 로그아웃 버튼 오버라이드 */

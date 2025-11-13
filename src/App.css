@@ -14,22 +14,21 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 body {
-  /* 헤더의 높이만큼 페이지 상단에 여백을 줍니다. */
-  /* 헤더 높이가 60px가 아니라면 실제 높이에 맞게 조절해주세요. */
-  padding-top: 60px;
+    margin: 0;
+    padding: 0;
 }
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
