@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e6f32b-9c30-4bc5-8a11-d1344693142b" name="변경" comment="main" />
+    <list default="true" id="64e6f32b-9c30-4bc5-8a11-d1344693142b" name="변경" comment="main">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/Header.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +15,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -75,7 +79,11 @@
       <updated>1762933923237</updated>
       <workItem from="1762933924797" duration="540000" />
       <workItem from="1762934635132" duration="60000" />
-      <workItem from="1763013813840" duration="336000" />
+      <workItem from="1763013813840" duration="1329000" />
+      <workItem from="1763213453309" duration="34000" />
+      <workItem from="1763214402852" duration="8000" />
+      <workItem from="1763350782405" duration="330000" />
+      <workItem from="1763357728893" duration="2261000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <option name="closed" value="true" />
@@ -106,6 +114,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="main" />

@@ -1,8 +1,10 @@
 /* 헤더 전체 */
 .lk-header {
-    background: #fff;
-    border-bottom: 1px solid #eef0f3 ;
-    position: sticky; /* 스크롤 해도 상단 고정 */
+    /* 이미지에 맞게 어두운 배경으로 수정 */
+    background: #1A2E4D;
+    /* 어두운 배경에는 테두리가 필요 없으므로 제거 */
+    /* border-bottom: 1px solid #eef0f3; */
+    position: sticky;
     top: 0;
     z-index: 50;
 }
@@ -24,7 +26,7 @@
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: #111827;
+    color: #FFFFFF; /* 흰색 글씨로 수정 */
     font-weight: 800;
     background: none;
     border: none;
@@ -40,35 +42,47 @@
     gap: 8px;
 }
 
-/* 로그인/로그아웃 버튼 */
-.lk-btn {
-    font-size: 14px;
-    border-radius: 999px;
-    padding: 8px 14px;
-    cursor: pointer;
-    border: 1px solid #d1d5db;
-    background: #fff;
-}
-.lk-btn--ghost:hover { background: #f3f4f6; }
 .lk-btn--solid {
-    background: #111827;
-    color: #fff;
-    border-color: #111827;
+    background: #FFFFFF; /* 배경 흰색 */
+    color: #1A2E4D;      /* 글씨는 어두운 색 */
+    border: 1px solid #FFFFFF;
 }
-.lk-btn--solid:hover { filter: brightness(1.1); }
+.lk-btn--solid:hover { filter: brightness(.95); }
 
-/* 마이페이지 버튼*/
+/* =================================== */
+/* ★★★ 수정된 부분 (분리된 스타일) ★★★ */
+/* =================================== */
+
+/* 1. 마이페이지 <a> 태그 스타일 */
 .lk-link {
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: #374151;
+    text-decoration: none;
+    color: #FFFFFF; /* 흰색 글씨로 수정 */
     padding: 8px 10px;
     border-radius: 10px;
+    font-size: 14px;
+    background-color: transparent; /* 배경 투명 */
 }
-.lk-link:hover { background: #f3f4f6; }
 
-/* ?(가이드) 버튼 */
+/* 2. 로그아웃 <button> 태그 스타일 */
+.lk-btn {
+    /* 버튼 기본 스타일 완벽 초기화 */
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    outline: none;
+    cursor: pointer;
+}
+
+/* 3. 두 버튼의 공통 호버(hover) 효과 */
+.lk-link:hover,
+.lk-btn:hover {
+    color: #FFFFFF; /* 글씨색은 그대로 흰색 유지 */
+}
+
+
 .lk-iconbtn {
     border: 1px solid #e5e7eb;
     background: #fff;
@@ -78,3 +92,4 @@
     border-radius: 10px;
 }
 .lk-inconbtn:hover { background: #f9fafb; }
+
