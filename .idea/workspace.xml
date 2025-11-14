@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="64e6f32b-9c30-4bc5-8a11-d1344693142b" name="변경" comment="main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ListingTypeSelector.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ListingTypeSelector.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/page/Guide.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/Guide.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/Guide.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/Guide.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/MyPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/MyPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/MyPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/MyPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/chat.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/page/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/chat.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,12 +23,12 @@
     &quot;assignee&quot;: &quot;jinhyean54&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/AIRentalScamPrevention/protect_house.git",
-    "accountId": "f7c56913-8d80-403a-882d-1cec2a451239"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AIRentalScamPrevention/protect_house.git&quot;,
+    &quot;accountId&quot;: &quot;f7c56913-8d80-403a-882d-1cec2a451239&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -44,23 +38,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.start.executor": "Run",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -89,7 +83,8 @@
       <workItem from="1762933924797" duration="540000" />
       <workItem from="1762934635132" duration="60000" />
       <workItem from="1763013813840" duration="336000" />
-      <workItem from="1763014093581" duration="7263000" />
+      <workItem from="1763014093581" duration="8133000" />
+      <workItem from="1763082509344" duration="4758000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <option name="closed" value="true" />
@@ -130,7 +125,6 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/ListingTypeSelector.js</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

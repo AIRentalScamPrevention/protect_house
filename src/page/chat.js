@@ -24,7 +24,7 @@ export default function Chat() {
                 fileInputRef.current.value = null;
             }
         } else if (file) {
-            alert("이미지(image/*) 또는 PDF 파일만 업로드할 수 있습니다.");
+            alert("이미지 또는 PDF 파일만 업로드할 수 있습니다.");
         }
     };
 

@@ -55,9 +55,27 @@
     padding: 14px 4px;
     display: flex;
     align-items: center;
+    position: relative;
+    padding-right: 30px;
     gap: 8px;
 }
 .card > summary::-webkit-details-marker { display: none; }
+
+.card > summary::after {
+    content: '❯'; /* 화살표 아이콘 문자 */
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-gray);
+    position: absolute;
+    right: 12px; /* 오른쪽 여백 */
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg); /* 기본 상태 (0도) */
+    transition: transform 0.3s ease-in-out; /* 회전 애니메이션 */
+}
+
+.card[open] > summary::after {
+    transform: translateY(-50%) rotate(90deg); /* 열린 상태 (90도 회전) */
+}
 
 .card-title {
     font-weight: 700;
