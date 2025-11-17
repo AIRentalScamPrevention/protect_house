@@ -7,19 +7,20 @@ import "./ListingTypeSelector.css"
  * - 하나 선택하면 '다음' 버튼 활성화
  * - 카드를 클릭하면 즉시 onSelect(type) 호출
  */
-export default function ListingTypeSelector({onConfirm}) {
+// props 이름을 onConfirm에서 onSelect로 변경하여 Chat.js와 통일합니다.
+export default function ListingTypeSelector({ onSelect }) {
     const [selected, setSelected] = useState(null);
 
     const options = [
         { key: "월세", desc: "보증금, 인상, 미납"},
         { key: "전세", desc: "사기, 보증보험, 확정일자"},
         { key: "매매", desc: "계약금, 하자, 소유권"},
-
     ];
 
     const pick = (key) => {
         setSelected(key);
-        onselect?.(key); // 다음 버튼 없이 즉시 선택 완료
+        // 오타 수정: onselect -> onSelect (props로 받은 함수 사용)
+        onSelect?.(key);
     };
 
     return (

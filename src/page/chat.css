@@ -23,14 +23,17 @@
     justify-content: center;
 }
 
+/* 2. 대화 스트림 (메시지 영역) 수정 */
 .chat-stream {
     display: flex;
-    flex-direction: column;         /* 메시지들을 세로로 쌓음 */
-    justify-content: flex-end;      /* 메시지를 아래쪽부터 쌓이게 함 */
-    gap: 12px;                      /* 메시지 간 간격 */
-    flex: 1;                        /* 남는 공간을 차지하여 스크롤이 가능하도록 함 */
-    padding-bottom: 0;              /* 입력창과의 간격은 이미 chat-page에서 처리됨 */
-    overflow-y: auto;               /* 메시지가 많아지면 스크롤 가능 */
+    flex-direction: column;
+    gap: 8px;
+
+    /* ✅ 스크롤 핵심 설정 */
+    overflow-y: auto; /* 내용이 넘치면 세로 스크롤 생성 */
+    height: 100%;     /* 부모 영역 높이만큼 꽉 채움 */
+
+    padding-right: 6px; /* 스크롤바 공간 확보 */
 }
 
 .bubble {
