@@ -283,7 +283,7 @@ export default function MyPage() {
                             </div>
                             <div className="mp-card-actions">
                                 <button className="btn-ghost" onClick={() => goDetail(log.id)}>다시 확인</button>
-                                <button className="btn-outline" onClick={() => shareLink(log.id)}>공유</button>
+                                <button className="btn-outline1" onClick={() => shareLink(log.id)}>공유</button>
                             </div>
                         </li>
                     ))}
@@ -301,17 +301,17 @@ export default function MyPage() {
                     <hr />
                     <ul className="mp-quick">
                         <li>
-                            <button className="btn-outline" style={{ width: "100%" }} onClick={() => setOpenInfo(true)}>
+                            <button className="btn-outline1" style={{ width: "100%" }} onClick={() => setOpenInfo(true)}>
                                 내 정보 관리
                             </button>
                         </li>
                         <li>
-                            <button className="btn-outline" style={{ width: "100%" }} onClick={() => setOpenPw(true)}>
+                            <button className="btn-outline1" style={{ width: "100%" }} onClick={() => setOpenPw(true)}>
                                 비밀번호 변경
                             </button>
                         </li>
                         <li>
-                            <button className="btn-outline" style={{ width: "100%" }} onClick={() => { logout(); nav("/login"); }}>
+                            <button className="btn-outline1" style={{ width: "100%" }} onClick={() => { logout(); nav("/login"); }}>
                                 로그아웃
                             </button>
                         </li>
