@@ -10,6 +10,29 @@
     --color-bg: #F8F9FA;
     --color-white: #FFFFFF;
 
+      /* 제가 추가한 내용 -김동하- */
+    --color-gray-dark : #334155;
+    --color-gray-silver : #d9dee5;
+    --color-gray-light2 :  #adb5bd;
+    --color-blue2 : #1e4db7;
+    --color-blue-sky : #d7e7ff;
+    --color-pink-pale : #ffe9e9;
+    --color-red-dark : #c13232;
+    --color-pink-peach : #ffd1d1;
+    --color-white-pale : #fff7e6;
+    --color-brown : #9b6b00;
+    --color-yellow-light : #ffe9bf;
+    --color-blue-indigo : #4356b5;
+    --color-blue-pale : #e1e8ff;
+    --color-green-mint : #e8faf0;
+    --color-green2 : #1f7a46;
+    --color-green-light : #c7f0d7;
+    --color-red : #dc2626;
+    --color-blue-bright: #2563eb;
+    --color-blue-light: #93c5fd;
+    --color-navy-deep : #1A2E4D;
+    --color-blue-glow : rgba(0,174,239,.35);
+
 
     /* Typography */
     --font-sans: 'Noto Sans KR', system-ui, -apple-system, Segoe UI, roboto, Helvetica, Arial, 'Apple SD Gothic Neo', 'Malun Gothic', sans-derif;
