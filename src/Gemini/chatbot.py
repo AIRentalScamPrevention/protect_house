@@ -49,7 +49,8 @@ def chat_with_gemini(user_input):
     try:
         response = model.generate_content(user_input)
         
-        return response.txt
+        return response.text
     
     except Exception as e:
+
         return f"오류: API 호출 중 문제가 발생했습니다. ({e})"
