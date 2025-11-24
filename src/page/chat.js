@@ -1,169 +1,95 @@
-import React, { useState, useRef, useEffect } from "react";
-import "./chat.css";
-import ReactMarkdown from 'react-markdown'; // 마크다운 라이브러리
-import ListingTypeSelector from "../components/ListingTypeSelector";
-import { sendMessage, analyzeDocument } from "../api/chatApi";
+// CRA(.env)에서 백엔드 게이트웨이(A) 주소 읽기
+const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:4000";
 
-export default function Chat() {
-    const [messages, setMessages] = useState([]); // 대화 저장
-    const [input, setInput] = useState(""); // 입력창 값
-    const [busy, setBusy] = useState(false); // 전송 중 상태 표시
+/* 공통: JSON fetch (타임아웃 포함) */
+async function jsonFetch(url, { method = "GET", headers = {}, body, timeoutMs = 30000 } = {}){
+    const ctrl = new AbortController();
+    const id = setTimeout(() => ctrl.abort(), timeoutMs);
 
-    // 파일 처리를 위한 새로운 상태와 ref
-    const [imageFile, setImageFile] = useState(null);
-    const fileInputRef = useRef(null);
+    const res = await fetch(url, {
+        method,
+        headers: { "content-Type": "application/json", ...headers },
+        body: body ? JSON.stringify(body) : undefined,
+        signal: ctrl.signal,
+        credentials: "include", // 쿠키 기반 인증 쓸 경우 대비
+    }).catch((e) => {
+        clearTimeout(id);
+        throw e;
+    });
 
-    // 스크롤 자동 이동을 위한 ref
-    const messagesEndRef = useRef(null);
+    clearTimeout(id);
+    if(!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(`HTTP ${res.status} ${res.statusText} :: ${text}`);
+    }
+    return res.json();
+}
 
-    // 메시지가 추가될 때마다 스크롤 아래로 이동
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
+/* 1) 단발 요청 : POST /api/chat */
+export async function sendMessage(messages, options = {}) {
+    return jsonFetch(`${API_BASE}/api/chat`, {
+        method: "POST",
+        body: {messages, ...(options.payload || {})},
+        timeoutMs: options.timeoutMs ?? 60000,
+        headers: options.headers || {}, // 필요 시 인증 헤더 등
+    });
+}
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
+//이미지 파일 분석 요청
+export const analyzeDocument = async (file, message) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('message', message);
+    const response = await fetch(`${API_BASE}/api/analyze-document`, {
+        method :'POST',
+        body : formData,
+    });
 
-    // 파일 입력을 실행하는 함수
-    const handleAttachClick = () => {
-        if (busy) return;
-        fileInputRef.current.click();
-    };
+    if (!response.ok) {
+        const errorBody = await response.json().catch(() => ({ error: "알 수 없는 서버 오류" }));
+        throw new Error(errorBody.error || `HTTP 오류: ${response.status}`);
+    }
 
-    // 파일 선택 처리 함수
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setImageFile(file);
-            setInput("");
+    return response.json();
+};
+
+/**
+ * 2) 스트리밍 요청(SSE): GET /api/chat/stream
+ * onToken(data: string) - 'data: ...' 한 덩이씩 들어올 때 호출
+ * onDone() - 서버에서 완료 이벤트 수신([DONE]) 또는 스트림 종료
+ * onError(err) - 네트워크 에러 등
+ * 반환: stop() 함수 (원하면 스트림 중단)
+ */
+
+export function streamMessage({ onToken, onDone, onError, query,headers } = {}) {
+    // query 필요하면 여기서 조립 (예: ID 전달 등)
+    const qs = query ? "?" + new  URLSearchParams(query).toString() : "";
+    const url = `${API_BASE}/api/chat/stream${qs}`;
+
+    // 기본 EventSource는 커스텀 헤더 미지원.
+    // 헤더가 꼭 필요하면 A에서 쿠키 기반 인증이나, POST -> SSE 업르레이드 엔드포인트를 따로 두는 게 일반적.
+    const es = new EventSource(url, { withCredentials: true });
+
+    es.onmessage = (e) => {
+        if (onToken) onToken(e.data);
+        // 서버가 done을 custom event로 보내는 경우도 있어 아래처럼 수신
+        if (e.data === "[DONE]") {
+            try { es.close(); } catch {}
+            if (onDone) onDone();
         }
     };
 
-    // 메시지 보내기 함수
-    const onSend = async () => {
-        const t = input.trim();
-        // 텍스트도 없고 이미지도 없으면 리턴
-        if (!t && !imageFile) return;
-        if (busy) return;
+    es.addEventListener("done", () => {
+        try { es.close(); } catch {}
+        if (onDone) onDone();
+    });
 
-        setBusy(true);
+    es.addEventListener("error", (e) => {
+        try { es.close(); } catch {}
+        if (onError) onError(e);
+    });
 
-        // 이미지 파일이 있을 때
-        if (imageFile) {
-            const imageUrl = URL.createObjectURL(imageFile);
-            // 사용자 메시지 추가 (이미지 + 텍스트)
-            const base = [...messages, { role: "user", type: "image", content: imageUrl }];
-            if (t) {
-                // 이미지만 보낼 수도 있고, 텍스트를 같이 보냈으면 텍스트 말풍선도 추가
-                base.push({ role: "user", type: "text", content: t });
-            }
-            setMessages(base);
-
-            try {
-                // 이미지와 텍스트(t)를 함께 전송
-                const { reply } = await analyzeDocument(imageFile, t);
-                setMessages(prev => [...prev, { role: "assistant", type: "text", content: reply }]);
-            } catch (e) {
-                setMessages(prev => [
-                    ...prev,
-                    { role: "assistant", type: "text", content: `에러: ${e.message}` },
-                ]);
-            } finally {
-                setImageFile(null);
-            }
-        }
-        // 텍스트만 있을 때
-        else {
-            const base = [...messages, { role: "user", type: "text", content: t }];
-            setMessages(base);
-
-            try {
-                const wireMsgs = base.map((m) => ({ role: m.role, content: m.content }));
-                const { reply } = await sendMessage(wireMsgs);
-                setMessages(prev => [...prev, { role: "assistant", type: "text", content: reply }]);
-            } catch (e) {
-                setMessages(prev => [
-                    ...prev,
-                    { role: "assistant", type: "text", content: `에러: ${e.message}` },
-                ]);
-            }
-        }
-
-        setInput("");
-        setBusy(false);
-        if (fileInputRef.current) {
-            fileInputRef.current.value = null;
-        }
+    return () => {
+        try { es.close(); } catch {}
     };
-
-    // Enter 키로 전송
-    const onKeyDown = (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            onSend();
-        }
-    };
-
-    // 카드 클릭 시, 주제에 맞는 첫 질문으로 전환
-    const handleSelectType = (Type) => {
-        setMessages([
-            {
-                role: "assistant",
-                type: "text",
-                content: `${Type} 상담을 시작할게요. 어떤 점이 궁금하신가요?`
-            },
-        ]);
-    };
-
-    const hasMessages = messages.length > 0;
-
-    return (
-        <section className="chat-page">
-            {hasMessages ? (
-                <div className="chat-stream">
-                    {messages.map((m, i) => (
-                        <div key={i} className={`bubble ${m.role}`}>
-                            {/* ✅ 수정된 부분: 이미지와 텍스트(마크다운) 구분 렌더링 */}
-                            {m.type === 'image' ? (
-                                <img src={m.content} alt="uploaded content" className="chat-image" />
-                            ) : (
-                                <div className="markdown-content">
-                                    <ReactMarkdown>{m.content}</ReactMarkdown>
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                    {/* 스크롤 자동 이동을 위한 더미 요소 */}
-                    <div ref={messagesEndRef} />
-                </div>
-            ) : (
-                <ListingTypeSelector onSelect={handleSelectType} />
-            )}
-
-            <div className="chat-input">
-                <button className="attach-btn" onClick={handleAttachClick} disabled={busy}>+</button>
-
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{ display: 'none' }}
-                    accept="image/*,application/pdf"
-                    onChange={handleFileChange}
-                />
-
-                <textarea
-                    rows={1}
-                    placeholder={imageFile ? `${imageFile.name} (메시지를 함께 보낼 수 있어요)` : "메시지를 입력하세요."}
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={onKeyDown}
-                    disabled={busy}
-                />
-                <button className="send-btn" onClick={onSend} disabled={busy}>
-                    {busy ? "..." : "➤"}
-                </button>
-            </div>
-        </section>
-    );
 }
