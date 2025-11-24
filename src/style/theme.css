@@ -1,0 +1,115 @@
+/* ======= Design Tokens ======= */
+:root {
+    /* colors */
+    --color-navy: #1A1E4D;
+    --color-blue: #00AEEF;
+    --color-green: #26D0A9;
+    --color-black: #212529;
+    --color-gray: #6c757d;
+    --color-gray-light: #E9ECEF;
+    --color-bg: #F8F9FA;
+    --color-white: #FFFFFF;
+
+    /* (추가로 써먹기 좋게 약간만 더 정의) */
+    --color-border: var(--color-gray-light);
+    --color-muted: var(--color-gray);
+    --color-chat-assistant: #F3F4F6; /* 챗봇 말풍선 배경 */
+    --color-chat-user: var(--color-navy);
+    --color-chat-typing-dot: var(--color-blue);
+
+    /* Typography */
+    --font-sans: 'Noto Sans KR', system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+    --fs-xxl: 40px; /* 히어로 타이틀 */
+    --fs-xl: 28px;  /* 섹션 타이틀 (오타 fe-xl → fs-xl로 수정) */
+    --fs-lg: 20px;  /* 카드 타이틀 */
+    --fs-md: 16px;  /* 본문 기본 */
+    --fs-sm: 14px;  /* 설명/보조 */
+
+    /* Spacing */
+    --sp-1: 8px;
+    --sp-2: 12px;
+    --sp-3: 16px;
+    --sp-4: 20px;
+    --sp-5: 24px;
+    --sp-6: 32px;
+    --sp-7: 40px;
+    --sp-8: 48px;
+
+    /* Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    /* Elevation (shadow) */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.12);
+
+    /* Component Tokens */
+    --btn-height: 40px;
+    --input-height: 44px;
+    --container-max: 1100px;
+
+    /* 헤더 높이 (채팅 레이아웃에서 사용) */
+    --header-height: 64px;
+}
+
+/* ======= Global Base ======= */
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    color: var(--color-black);
+    background: var(--color-bg);
+    font-family: var(--font-sans);
+    font-size: var(--fs-md);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Utility */
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--sp-4);
+}
+
+.text-muted {
+    color: var(--color-muted);
+}
+
+/* 공통 버튼 */
+.btn {
+    height: var(--btn-height);
+    padding: 0 var(--sp-3);
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: var(--color-white);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--color-green);
+    color: var(--color-white);
+}
+
+.btn-outline {
+    border-color: var(--color-blue);
+    color: var(--color-blue);
+    background: var(--color-white);
+}
+
+/* 카드 공통 스타일 */
+.card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
