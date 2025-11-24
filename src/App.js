@@ -48,7 +48,7 @@ export default function App() {
 
                     {/* 3. 새로운 채팅 페이지 라우트를 추가합니다. (보호) */}
                     <Route
-                        path="/chat"
+                        path="/Chat"
                         element={
                             <PrivateRoute>
                                 <ChatPage />

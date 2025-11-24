@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e6f32b-9c30-4bc5-8a11-d1344693142b" name="변경" comment="main 이동 및 가이드 새탭">
-      <change afterPath="$PROJECT_DIR$/src/Gemini/chatbot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Gemini/fire.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Gemini/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/chat.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/page/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/chat.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +41,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main 병합 중",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -51,6 +49,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.start.executor": "Run",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -85,7 +84,7 @@
       <workItem from="1763542809419" duration="746000" />
       <workItem from="1763963182077" duration="5369000" />
       <workItem from="1763970325457" duration="122000" />
-      <workItem from="1763970685848" duration="340000" />
+      <workItem from="1763970685848" duration="651000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <option name="closed" value="true" />
@@ -151,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763970861183</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="main 이동 및 가이드 새탭">
+      <option name="closed" value="true" />
+      <created>1763971041661</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1763971041661</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
