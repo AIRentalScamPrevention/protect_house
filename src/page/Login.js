@@ -80,14 +80,23 @@ export default function Login() {
                             className="signup-link"
                             type="button"
                         >
-                            처음이라면 회원가입
+                            회원가입
+                        </button>
+
+                        <span className="divider">|</span>
+                        <button
+                            type="button"
+                            className="pwreset-link"
+                            onClick={() => nav("/password-reset")}
+                        >
+                            비밀번호 재설정
                         </button>
                     </div>
                 </div>
             </div>
 
             {/* 회원가입 모달 */}
-            {openSignup && <SignupModal onClose={() => setOpenSignup(false)} />}
+            {openSignup && <SignupModal onClose={() => setOpenSignup(false)}/>}
 
             <footer className="login-footbar">
                 <span>© 2025 전세사기 방지 프로젝트</span>

@@ -129,8 +129,11 @@
     font-weight: 600;
     cursor: pointer;
 }
-.signup-btn:hover:not(:disabled){ filter: brightness(1.05); }
-.signup-btn:disabled{ opacity:.6; cursor: not-allowed; }
+.signup-btn:hover:not(:disabled) {
+    background-color: #394aa7 !important;
+    border-color: #394aa7 !important;
+    filter: none !important; /* 밝기 효과 제거 (필요하면 유지도 가능) */
+}
 
 /* 반응형 */
 @media (max-width: 640px){

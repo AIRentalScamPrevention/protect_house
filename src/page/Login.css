@@ -3,7 +3,7 @@
     --card: #FFFFFF;     /* ⬜️ 화이트(카드/팝업 배경) */
     --line: #e5e7eb;     /* 라인(경계) */
     --text: #212529;     /* ⚫️ 텍스트 블랙 */
-    --primary: #00AEEF;  /* 💧 선명한 파랑 (기본 버튼/링크) */
+    --primary: #1A2E4D;  /* 💧 선명한 파랑 (기본 버튼/링크) */
 
     /* 헤더/푸터 */
     --header-h: 68px;     /* 헤더 높이 */
@@ -41,14 +41,19 @@
     box-sizing: border-box !important;
 }
 
+.login-btn:hover:not(:disabled) {
+    background: #364599 !important; /* 원래 색보다 8% 어둡게 */
+    border-color: #364599 !important;
+}
+
 /* 인풋 외형 복구 */
 .login-form input {
-    display: block !important;   /* inline으로 덮였을 때 차단 */
+    display: block !important;
     padding: 12px 14px !important;
     border-radius: 10px !important;
     border: 1px solid var(--line, #e5e7eb) !important;
-    background: #FFFFFF !important;                 /* ⬜️ */
-    color: var(--text, #212529) !important;         /* ⚫️ */
+    background: #FFFFFF !important;
+    color: var(--text, #212529) !important;
     outline: none !important;
 }
 
@@ -57,8 +62,8 @@
     display: block !important;
     padding: 12px 14px !important;
     border-radius: 10px !important;
-    border: 1px solid var(--primary, #00AEEF) !important;
-    background: var(--primary, #00AEEF) !important; /* 💧 */
+    border: 1px solid var(--primary) !important;
+    background: var(--primary) !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
 }
@@ -77,7 +82,6 @@
     z-index: 10;
 }
 
-/* (텍스트 타이틀을 쓰는 경우용 – 지금은 로고만 사용하니 영향 없음) */
 .site-title{
     margin: 0;
     font-size: 18px;
@@ -85,7 +89,7 @@
     color: #FFFFFF;
 }
 
-/* 브랜드 로고 (이미지) */
+/* 브랜드 로고 */
 .brand-link{
     display: inline-flex;
     align-items: center;
@@ -130,7 +134,7 @@
     border-radius: 4px;
 }
 
-/* 로그인 카드 중앙: 헤더/푸터 높이만큼 영역 보정 */
+/* 로그인 카드 중앙 */
 .login-wrap{
     position: fixed;
     left: 0; right: 0;
@@ -144,7 +148,7 @@
     z-index: 1;
 }
 
-/* 푸터도 전체폭 고정 */
+/* 푸터 */
 .login-footbar{
     position: fixed;
     left: 0; right: 0; bottom: 0;
@@ -158,45 +162,54 @@
     z-index: 5;
 }
 
-/* 하단 회원가입 버튼을 텍스트 링크처럼 보이게 */
-.login-footer .signup-link {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font: inherit;
-    color: var(--header-bg);
-    text-decoration: underline;
-    cursor: pointer;
-    outline: none;
-    appearance: none;
-    transition: color .15s ease; /* 부드러운 색상 전환 효과 */
+/* 하단 링크 스타일 */
+.login-footer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
 }
 
-/* ✅ 추가된 부분 */
-.login-footer .signup-link:hover {
-    color: var(--primary); /* 기본 링크/버튼 색상으로 변경 */
+/* 🔥 회원가입, 비밀번호 재설정 둘 다 동일하게 적용 */
+.login-footer .signup-link,
+.login-footer .pwreset-link {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font: inherit !important;
+    color: var(--header-bg) !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+    outline: none !important;
+    appearance: none !important;
+    transition: color .15s ease !important;
 }
 
-.login-footer .signup-link:focus-visible {
-    outline: 2px solid rgba(10, 35, 66, 0.8);  /* 딥네이비 포커스 링 */
-    outline-offset: 2px;
-    border-radius: 4px;
+.login-footer .signup-link:hover,
+.login-footer .pwreset-link:hover {
+    color: var(--primary) !important;
 }
 
-/* 페이지 본문이 헤더 아래에서 시작하도록 상단/하단 패딩(고정 바 대비) */
+.divider {
+    color: #adb5bd;
+    padding: 0 4px;
+    font-size: 14px;
+    user-select: none;
+}
+
+/* 페이지 본문 보정 */
 .page{
     padding-top: var(--header-h);
     padding-bottom: var(--footer-h);
 }
 
-/* 안전장치: 어떤 상위 그리드여도 전체 span */
 .page, .login-wrap{
     grid-column: 1 / -1;
     width: 100% !important;
 }
 
-/* 선택: 큰 화면에서 로고 조금 더 키우고 싶을 때 */
+/* 큰 화면 로고 확장 */
 @media (min-width: 1024px) {
     :root { --logo-h: 110px; }
 }
