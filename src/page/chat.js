@@ -2,28 +2,29 @@ import React, { useState, useRef, useEffect } from "react";
 import "./chat.css";
 import ListingTypeSelector from "../components/ListingTypeSelector";
 import { sendMessage, analyzeDocument } from "../api/chatApi";
+import ReactMarkdown from "react-markdown";
 
 export default function Chat() {
-    const [messages, setMessages] = useState([]);       // [{ role, type, content }]
-    const [input, setInput] = useState("");             // 텍스트
-    const [busy, setBusy] = useState(false);            // 요청 중 여부
-    const [isTyping, setIsTyping] = useState(false);    // 챗봇 타이핑 표시
-    const [imageFile, setImageFile] = useState(null);   // 업로드 파일
-    const fileInputRef = useRef(null);                  // 숨겨진 file input
-    const bottomRef = useRef(null);                     // 자동 스크롤용
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState("");
+    const [busy, setBusy] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
+    const [imageFile, setImageFile] = useState(null);
+    const fileInputRef = useRef(null);
+    const bottomRef = useRef(null);
 
-    // 메시지 추가될 때마다 아래로 스크롤
+    // ✅ 1. 상담 유형(월세/전세/매매)을 기억할 변수 추가
+    const [consultType, setConsultType] = useState("");
+
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages, isTyping]);
 
-    // + 버튼 클릭 → 파일 선택
     const handleAttachClick = () => {
         if (busy) return;
         fileInputRef.current?.click();
     };
 
-    // 파일 선택
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
         if (file) {
@@ -31,8 +32,9 @@ export default function Chat() {
         }
     };
 
-    // 카드(월세/전세/매매) 선택
+    // 카드 선택 함수
     const handleSelectType = (type) => {
+        setConsultType(type); // ✅ 2. 사용자가 선택한 유형을 기억함
         setMessages([
             {
                 role: "assistant",
@@ -42,7 +44,6 @@ export default function Chat() {
         ]);
     };
 
-    // 메시지 전송
     const onSend = async () => {
         const text = input.trim();
         if (!text && !imageFile) return;
@@ -52,13 +53,11 @@ export default function Chat() {
 
         let base = [...messages];
 
-        // 1) 사용자가 올린 이미지 미리보기용 말풍선
         if (imageFile) {
             const previewUrl = URL.createObjectURL(imageFile);
             base = [...base, { role: "user", type: "image", content: previewUrl }];
         }
 
-        // 2) 텍스트도 같이 있으면 말풍선 추가
         if (text) {
             base = [...base, { role: "user", type: "text", content: text }];
         }
@@ -69,19 +68,28 @@ export default function Chat() {
         try {
             setIsTyping(true);
 
+            // ✅ 3. AI에게 보낼 때 유형 정보를 몰래 붙여서 보냄
+            // 예: "[전세 상담] 이 계약서 봐주세요"
+            const contextMessage = `[${consultType || '일반'} 상담] ${text}`;
+
             if (imageFile) {
-                // 이미지 + (옵션) 텍스트 함께 분석
-                const { reply } = await analyzeDocument(imageFile, text || "");
+                // 이미지 분석 시에도 유형 정보 전달
+                const { reply } = await analyzeDocument(imageFile, contextMessage);
                 setMessages((prev) => [
                     ...prev,
                     { role: "assistant", type: "text", content: reply },
                 ]);
             } else {
-                // 텍스트만 보낼 때
-                const wireMsgs = base.map((m) => ({
-                    role: m.role,
-                    content: m.content,
-                }));
+                // 텍스트만 보낼 때도 유형 정보 전달
+                // 화면에는 사용자 입력 그대로 보여주지만, 서버로는 contextMessage를 보냄
+                const wireMsgs = base.map((m) => {
+                    // 방금 사용자가 입력한 텍스트 메시지를 찾아서 내용을 바꿔치기함
+                    if (m.role === 'user' && m.type === 'text' && m.content === text) {
+                        return { role: m.role, content: contextMessage };
+                    }
+                    return { role: m.role, content: m.content };
+                });
+
                 const { reply } = await sendMessage(wireMsgs);
                 setMessages((prev) => [
                     ...prev,
@@ -103,7 +111,6 @@ export default function Chat() {
         }
     };
 
-    // Enter로 전송 (Shift+Enter는 줄바꿈)
     const onKeyDown = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
@@ -115,7 +122,6 @@ export default function Chat() {
 
     return (
         <section className="chat-page">
-            {/* 위쪽: 카드 선택 or 대화 스트림 */}
             <div className="chat-content-area">
                 {hasMessages ? (
                     <div className="chat-stream">
@@ -130,27 +136,28 @@ export default function Chat() {
                                         />
                                     </div>
                                 ) : (
-                                    m.content
+                                    <div className="markdown-content">
+                                        <ReactMarkdown>{m.content}</ReactMarkdown>
+                                    </div>
                                 )}
                             </div>
                         ))}
 
                         {isTyping && (
                             <div className="bubble assistant typing">
-                                <span className="typing-dot" />
-                                <span className="typing-dot" />
-                                <span className="typing-dot" />
+                                <span className="typing-dot"/>
+                                <span className="typing-dot"/>
+                                <span className="typing-dot"/>
                             </div>
                         )}
 
-                        <div ref={bottomRef} />
+                        <div ref={bottomRef}/>
                     </div>
                 ) : (
                     <ListingTypeSelector onSelect={handleSelectType} />
                 )}
             </div>
 
-            {/* 아래쪽: 입력 영역 */}
             <div className="chat-input-container">
                 {imageFile && (
                     <div className="file-preview-chip">

@@ -20,7 +20,9 @@ export default function ListingTypeSelector({ onSelect }) {
     const pick = (key) => {
         setSelected(key);
         // 오타 수정: onselect -> onSelect (props로 받은 함수 사용)
-        onSelect?.(key);
+        if (onSelect) {
+            onSelect(key);
+        }
     };
 
     return (

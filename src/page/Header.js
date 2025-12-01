@@ -15,7 +15,7 @@ export default function Header() {
 
     return (
         <header className="login-header">
-            <Link to={user ? "/chat":"/login"} className="brand-link" aria-label="홈">
+            <Link to="/" className="brand-link" aria-label="홈">
                 <img src={BrandLogo} alt="사이트 로고" className="site-logo"/>
             </Link>
 
@@ -29,7 +29,7 @@ export default function Header() {
                 ) : (
                     <Link to="/login" className="nav-link">로그인</Link>
                 )}
-                <Link to="/Guide" className="nav-link">가이드</Link>
+                <Link to="/Guide" className="nav-link" target="_blank">가이드</Link>
             </nav>
         </header>
     );
