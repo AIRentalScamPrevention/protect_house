@@ -29,7 +29,7 @@ async def chat(req: Request, body: dict):
 
     # 2️⃣ 요청 메시지 가져오기
     messages = body.get("messages", [])
-
+    
     if not messages:
         return JSONResponse({"reply": "메시지가 없습니다."})
 
@@ -41,8 +41,9 @@ async def chat(req: Request, body: dict):
             break
 
     # 4️⃣ 전세 체크리스트 키워드 처리
-    trigger_keywords = ["체크리스트", "확인할 사항", "확인 사항", "계약 전", "조심", "주의", "예방"]
-    if '전세' in user_last and any(keyword in user_last for keyword in trigger_keywords):
+    trigger_keywords = ["전세 계약", "전세 계약 전", "전세 체크리스트"]
+    if ("전세" in user_last and "월세" not in user_last 
+        and any(keyword in user_last for keyword in trigger_keywords)):
         reply_text = JEONSE_CHECKLIST
     else:
         # 5️⃣ 실제 Gemini API 호출
@@ -67,9 +68,9 @@ async def chat_stream(request: Request):
             user_last = m.get("content", "")
             break
 
-    # 전세 체크리스트 단어
-    trigger_keywords = ["체크리스트", "확인할 사항", "확인 사항", "계약 전", "조심", "주의", "예방"]
-    if '전세' in user_last and any(keyword in user_last for keyword in trigger_keywords):
+    trigger_keywords = ["전세 계약", "전세 계약 전", "전세 체크리스트"]
+    if ("전세" in user_last and "월세" not in user_last 
+        and any(keyword in user_last for keyword in trigger_keywords)):
         reply_text = JEONSE_CHECKLIST
     else:
         reply_text = chat_with_gemini(user_last)
