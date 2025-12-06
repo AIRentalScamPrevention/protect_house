@@ -1,10 +1,14 @@
 import { createContext, useContext, useState } from "react";
 
-const STORAGE_KEY = "demo_user";
+// ✅ 1. 백엔드 서버 주소 설정
+// (나중에 배포할 때는 환경변수 REACT_APP_API_BASE를 사용하고, 지금은 로컬 주소 사용)
+const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:4000";
+
+const STORAGE_KEY = "protect_house_user";
 
 /** 안전한 localStorage JSON 로드 */
 function loadUser() {
-    if (typeof window === "undefined") return null; // SSR 가드
+    if (typeof window === "undefined") return null;
     try {
         const raw = window.localStorage.getItem(STORAGE_KEY);
         return raw ? JSON.parse(raw) : null;
@@ -19,7 +23,7 @@ function saveUser(u) {
     try {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(u));
     } catch {
-        // quota/프라이버시 모드 등으로 실패할 수 있음 → 조용히 무시
+        // 무시
     }
 }
 
@@ -29,7 +33,7 @@ function clearUser() {
     try {
         window.localStorage.removeItem(STORAGE_KEY);
     } catch {
-        // 조용히 무시
+        // 무시
     }
 }
 
@@ -43,13 +47,15 @@ const AuthCtx = createContext({
 export const useAuth = () => useContext(AuthCtx);
 
 export function AuthProvider({ children }) {
-    // lazy initializer로 초기 사용자 로드(깜빡임 최소화)
     const [user, setUser] = useState(() => loadUser());
 
-    /** 데모용 로그인 */
-    const login = async ({ email, password: _pw }) => {
-        // _pw로 이름 바꿔서 no-unused-vars 경고 방지
-        const u = { email };
+    /** * 로그인 기능
+     * (아직 백엔드에 /api/login이 없으므로, 프론트엔드에서만 처리하는 임시 코드 유지)
+     * 추후 백엔드 로그인 API가 완성되면 여기도 fetch로 바꿔야 합니다.
+     */
+    const login = async ({ username, password }) => {
+        // 임시: 입력받은 정보로 로그인 상태만 만듦
+        const u = { username, nickname: "테스트유저", email: "test@example.com" };
         saveUser(u);
         setUser(u);
         return u;
@@ -61,26 +67,66 @@ export function AuthProvider({ children }) {
         setUser(null);
     };
 
-    /** 데모용 회원가입
-     *  - preferTypes 배열 또는 preferType 문자열 모두 허용
-     *  - 서버로는 preferType(문자열) 기준 사용
+    /** * ✅ [수정됨] 회원가입 기능 (서버 DB 연동)
+     * 이제 localStorage가 아니라 실제 서버로 데이터를 보냅니다.
      */
+        // src/auth/AuthContext.js
+
     const signup = async ({
                               nickname = "",
                               email = "",
                               username = "",
-                              password: _pw, // no-unused-vars 방지용
+                              password = "",
                               preferType,
                               preferTypes,
                           }) => {
-        const normalizedPreferType = Array.isArray(preferTypes)
-            ? preferTypes.join(",")
-            : (preferType || "");
 
-        const u = { email, nickname, username, preferType: normalizedPreferType };
-        saveUser(u);
-        setUser(u);
-        return u;
+            // 1. 데이터 정리
+            const normalizedPreferType = Array.isArray(preferTypes)
+                ? preferTypes.join(",")
+                : (preferType || "");
+
+            const payload = {
+                nickname,
+                email,
+                username,
+                password,
+                preferType: normalizedPreferType
+            };
+
+            // 🔍 [로그 추가 1] 내가 지금 어디로 보내려고 하는가?
+            console.log("🚀 회원가입 요청 시작!");
+            console.log("🔗 목표 주소 (URL):", `${API_BASE}/api/signup`);
+            console.log("📦 보낼 데이터:", payload);
+
+            try {
+                // 2. 서버 전송
+                const response = await fetch(`${API_BASE}/api/signup`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+
+                // 🔍 [로그 추가 2] 서버가 전화를 받았는가?
+                console.log("📡 서버 응답 상태:", response.status, response.statusText);
+
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    console.error("❌ 서버 에러 메시지:", errData); // 에러 내용 확인
+                    throw new Error(errData.error || "회원가입 요청 실패");
+                }
+
+                const newUser = { nickname, email, username, preferType: normalizedPreferType };
+                saveUser(newUser);
+                setUser(newUser);
+
+                return newUser;
+
+            } catch (error) {
+                // 🔍 [로그 추가 3] 아예 연결이 안 됐을 때 여기서 잡힘
+                console.error("🚨 치명적 오류 발생 (Failed to fetch 원인):", error);
+                throw error;
+            }
     };
 
     return (
