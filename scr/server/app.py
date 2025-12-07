@@ -1,7 +1,6 @@
 import os
 import requests
 import json
-import logging
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -40,14 +39,6 @@ CORS(app, resources={r"/api/*": {"origins": FRONT_ORIGIN}}, supports_credentials
 # 본인 컴퓨터의 Tesseract 설치 경로로 수정 필요
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
-logger = logging.getLogger(__name__)
-
-load_dotenv()
 
 # --- [함수 1] DB 연결 헬퍼 함수 ---
 def get_db_connection():
